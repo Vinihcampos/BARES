@@ -1,9 +1,13 @@
 #ifndef _BARES_
 #define _BARES_
 
+#include <iostream>
+#include <string>
 #include <vector>
 #include <stack>
 #include <queue>
+
+using namespace std;
 
 class Bares{
 
@@ -18,9 +22,40 @@ class Bares{
 		*	@return the result of expression
 		*	
 		**/
-		static long calculate(std::string & _word);
+		static long calculate(string & _expression);
 
-	private:
+		struct Node{
+			string symbol;
+			int index;
+			Node(string _symbol, int _index) : symbol {_symbol}, index {_index}{};
+		};
+
+		queue< pair < string, int > > errors;
+
+	public:
+		/**
+		*	TODO - Vinícius
+		*	Method that returns the priority of the symbol
+		*
+		*	@param _symbol The symbol to analize
+		*	@return a number of priority:
+		*	- 1: ()
+		*	- 2: -(unary)
+		*	- 3: ^
+		*	- 4: * / %
+		*	- 5: + -
+		**/
+		int priority(string _symbol);
+
+		/**
+		*	TODO - Vinícius
+		*	Method that returns if the symbol is valid
+		*
+		*	@param _symbol The symbol to analize
+		*	@return true if is a valid symbol, false otherwise 
+		**/
+		int validSymbol(char _symbol);
+
 		/**
 		*	TODO - Vinícius 
 		*	Method that split the expression element by element
@@ -28,16 +63,16 @@ class Bares{
 		*	@param _word The expression to be splitted
 		*	@return queue<std::string> The queue formed by each element of _word
 		**/
-		queue<std::string> split(std::string & _word);
+		void split(string & _expression, queue<Node> & queue);
 
 		/**
 		*	TODO - Vinicius
 		*	Method to tranform infix notation to postfix notation
 		*	
-		*	@param _splittedWord The queue formed by symbols( operands and opertators )
-		*	@return queue<std::string> The queue _splittedWord transformed to postfix notation
+		*	@param _splittedExpression The queue formed by symbols( operands and opertators )
+		*	@return queue<std::string> The queue _splittedExpression transformed to postfix notation
 		**/
-		queue<std::string> infixToPostfix(queue<std::string> & _splittedWord);
+		void infixToPostfix(queue<Node> & _splittedExpression, queue<Node> & newQueue);
 
 		/**
 		*	TODO Vitor
@@ -50,7 +85,7 @@ class Bares{
 		*	- 0: If the coputation is ok.
 		*	- 1: Numerical constant is invalid.
 		*	- 2: Lacking some operand 
-		*	- 3: Tthere is an invalid operand
+		*	- 3: There is an invalid operand
 		*	- 4: There is an invalid operator
 		*	- 5: Lacking some operator
 		*	- 6: Invalid scope closure
@@ -58,8 +93,9 @@ class Bares{
 		*	- 8: Division by zero
 		*
 		**/
-		int analizeExpression(queue<std::string> & _postFix, long & _result);
+		int analizeExpression(queue<Node> & _postFix, long & _result);
 
+	
 
 };
 
