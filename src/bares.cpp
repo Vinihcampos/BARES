@@ -46,14 +46,12 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 	Bares::Token * token = nullptr;
 	int i  = 0;
 	while (i < expression.size()) {
-	/*for (int i = 0; i < expression.size(); ++i) {*/
-		// ignorable
+		// ignore
 		if (expression[i] == ' ') { 
 			++i;
 			continue;
 		}		
-		
-		// it its a number, check if it's negative
+		// if its a number, check if it's negative
 		bool isNegative = false;
 		if (expression[i] == '-') {
 			// if it's not an operand or a ')'
@@ -62,21 +60,21 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 				while (expression[i + 1] == '-' || expression[i] == ' ') i++;
 			}
 		}
-	
+		
 		// check the type
 		TypeSymbol type = classifySymbol(expression[i]);
-	
+		
+		// new token
 		token = new Bares::Token {i, type};
 	
 		// if it's a negative number
 		if (isNegative) {
+			token->type = TypeSymbol::OPERAND;
 			token->symbol += "-";
 			++i;
-			token->type = TypeSymbol::OPERAND;
-			type = TypeSymbol::OPERAND;
 		}
 		
-		if (type == TypeSymbol::OPERAND) {
+		if (token->type == TypeSymbol::OPERAND) {
 			while (type == TypeSymbol::OPERAND && i < expression.size()) {
 				token->symbol += expression[i];
 				i++;
