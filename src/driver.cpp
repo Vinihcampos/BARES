@@ -9,15 +9,22 @@ using namespace std;
 int main(){
 
 	std::queue<Bares::Token> queueToken;
+	std::queue<Bares::Token> queueTokenized;
 	//string x = "(2900000ab.= +3) * 8";
-	string x = "***(3        + 5))))";
+	//string x = "***(3        + 5))))";
+	//string x = "((6+3)*2 - (3-2))^(5+2)";
+	//string x = "2^1*1-4+5/3/(2+2)";
+	//string x = "(2+3)*(3-2)";
+	//string x = "2 + 3 - 3";
+	//string x = "2 + 3";
+	//string x = "(-----2 * ------4)";
 	Bares bares;	
 	
 	bares.tokenize(x, queueToken);
-	
-	while (!queueToken.empty()) {
-		cout << "Token: "  << (queueToken.front()).symbol << endl;
-		queueToken.pop();
+	bares.infixToPostfix(queueToken, queueTokenized);	
+	while (!queueTokenized.empty()) {
+		cout << "Token: "  << (queueTokenized.front()).symbol << endl;
+		queueTokenized.pop();
 	}
 
 	/*queue<Bares::Token> m_queue;
