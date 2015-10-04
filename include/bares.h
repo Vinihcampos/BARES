@@ -16,7 +16,7 @@ class Bares{
 		*	TODO - Vitor 
 		*	
 		*	General method that use other private methods to realize 
-		*	the computation of excpression
+		*	the computation of expression
 		*	
 		*	@param _word An expression to be evaluated
 		*	@return the result of expression
@@ -24,10 +24,31 @@ class Bares{
 		**/
 		static long calculate(string & _expression);
 
-		struct Node{
+		
+		enum class ErrorCode {
+			INVALID_NUMBER = 1,
+			LACKING_OPERAND,
+			INVALID_OPERAND,
+			INVALID_OPERATOR,
+			LACKING_OPERATOR,
+			INVALID_SCOPE_CLOSE,
+			UNCLOSED_SCOPE,
+			DIVISION_BY_ZERO
+		};
+
+		enum class TypeSymbol {
+			OPERAND,
+			OPERATOR,
+			INVALID_OPERAND,
+			INVALID_OPERATOR
+		};
+
+		struct Token{
+			int column;
+			TypeSymbol type;
 			string symbol;
-			int index;
-			Node(string _symbol, int _index) : symbol {_symbol}, index {_index}{};
+			Token(){};
+			Token(int _column, TypeSymbol _type, string _symbol = "") : column (_column), type (_type), symbol (_symbol) {};
 		};
 
 		queue< pair < string, int > > errors;
@@ -54,7 +75,7 @@ class Bares{
 		*	@param _symbol The symbol to analize
 		*	@return true if is a valid symbol, false otherwise 
 		**/
-		int validSymbol(char _symbol);
+		TypeSymbol classifySymbol(char _symbol);
 
 		/**
 		*	TODO - Vinícius 
@@ -63,7 +84,7 @@ class Bares{
 		*	@param _word The expression to be splitted
 		*	@return queue<std::string> The queue formed by each element of _word
 		**/
-		void split(string & _expression, queue<Node> & queue);
+		void tokenize(string & expression, queue<Token> & queueToken);
 
 		/**
 		*	TODO - Vinicius
@@ -72,7 +93,7 @@ class Bares{
 		*	@param _splittedExpression The queue formed by symbols( operands and opertators )
 		*	@return queue<std::string> The queue _splittedExpression transformed to postfix notation
 		**/
-		void infixToPostfix(queue<Node> & _splittedExpression, queue<Node> & newQueue);
+		void infixToPostfix(queue<Token> & _splittedExpression, queue<Token> & newQueue);
 
 		/**
 		*	TODO Vitor
@@ -93,10 +114,7 @@ class Bares{
 		*	- 8: Division by zero
 		*
 		**/
-		int analizeExpression(queue<Node> & _postFix, long & _result);
-
-	
-
+		int analizeExpression(queue<Token> & _postFix, long & _result);
 };
 
 #endif

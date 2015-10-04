@@ -1,9 +1,9 @@
-#include "bares.h"
 #include <iostream>
 #include <string>
 #include <vector>
 #include <stack>
 #include <queue>
+#include "bares.h"
 
 using namespace std;
 
@@ -24,54 +24,66 @@ int Bares::priority(string _symbol){
 }
 
 //	Valid symbol method
-int Bares::validSymbol(char _symbol){
+Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	if( _symbol >= '0' && _symbol <= '9' ){
-		return 3; 
+		return TypeSymbol::OPERAND;
 	}else if( (_symbol >= 'a' && _symbol <= 'z' ) || (_symbol >= 'A' && _symbol <= 'Z' ) ){
-		return 2;
+		return TypeSymbol::INVALID_OPERAND;
 	}else if(_symbol == '+' || _symbol == '-' || 
 		_symbol == '*' || _symbol == '/' ||	
 		_symbol == '^' || _symbol == '%' || 
 		_symbol == '(' || _symbol == ')'){
-		return 1;
-	}else{ 
-		return 0;
+		return TypeSymbol::OPERATOR;
 	}
+	return TypeSymbol::INVALID_OPERATOR;
 }
 
 //	Split method
 //	Verifyng errors:
 // 	- 3: Invalid operand
 //	- 4: Invalid operator
-void Bares::split(string & _expression, queue<Bares::Node> & queue){
-	int index = -1;
-	string aux = "";
-	for(auto i (0); i < _expression.length(); ++i){
-		if(validSymbol(_expression[i]) == 2){
-			errors.push({"Invalid operand", i + 1});
-		}else if(validSymbol(_expression[i]) == 0 && _expression[i] != ' '){
-			errors.push({"Invalid operator", i + 1});
+void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
+	Bares::Token * token = nullptr;
+	int i  = 0;
+	while (i < expression.size()) {
+	/*for (int i = 0; i < expression.size(); ++i) {*/
+		// ignorable
+		if (expression[i] == ' ') { 
+			++i;
+			continue;
 		}
-
-		if(_expression[i] != ' '){
-			if(validSymbol(_expression[i]) == 3){
-				if(index == -1)
-					index = i + 1;
-				aux += _expression[i];
-			}else{
-				if(aux != ""){
-					queue.push({aux, index});
-					index = -1;
-				}
-				aux = _expression[i];
-				queue.push({aux, i + 1});				
-				aux = "";
+		// check the type
+		TypeSymbol type = classifySymbol(expression[i]);
+		
+		token = new Bares::Token {i, type};
+		
+		if (type == TypeSymbol::OPERAND) {
+			while (type == TypeSymbol::OPERAND && i < expression.size()) {
+				token->symbol += expression[i];
+				i++;
+				type = classifySymbol(expression[i]);
 			}
+		} else token->symbol += expression[i++];
+		queueToken.push(*token);
+	}
+		/*// if it was a number before, keep that number
+		if (type == TypeSymbol::OPERAND) {	
+			if (token == nullptr)
+				token = new Bares::Token {i, type};
+			token->symbol += expression[i];
+			continue;
+		} else {
+			if (token != nullptr)
+			       queueToken.push(*token);	
+			token = new Bares::Token {i, type};
+			token->symbol += expression[i];
 		}
+		queueToken.push(*token);
+		token = nullptr;
 	}
-	if(aux != ""){
-		queue.push({aux, index});
-	}
+	if (token != nullptr) 	
+		queueToken.push(*token);
+	*/
 }
 
 //	Infix to postfix method
@@ -79,8 +91,8 @@ void Bares::split(string & _expression, queue<Bares::Node> & queue){
 //	- 1: Numerical constant is invalid
 //	- 6: Invalid scope closure
 //	- 7: Opened scope	
-void Bares::infixToPostfix(queue<Bares::Node> & _splittedExpression, queue<Bares::Node> & newQueue){
-	stack<Bares::Node> stack;
+void Bares::infixToPostfix(queue<Bares::Token> & _splittedExpression, queue<Bares::Token> & newQueue){
+/*	stack<Bares::Token> stack;
 	while(!_splittedExpression.empty()){
 		if(_splittedExpression.front().symbol.length() > 1){
 			int x = stoi(_splittedExpression.front().symbol, nullptr, 10);
@@ -134,4 +146,33 @@ void Bares::infixToPostfix(queue<Bares::Node> & _splittedExpression, queue<Bares
 		}
 		stack.pop();
 	}
+*/
 }
+
+int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
+/*	Token curSymb; 		// current symbol
+	int op1, op2;		// operands
+	int res = 0;		// answer
+	stack<int> stackOp; 	// stack of operands
+
+	// there are symbols to be analyzed
+	while (!_postFix.empty()) {
+		curSymb = _postFix.front();	
+		
+		if (curSymb.l
+
+
+		_postFix.pop();
+	}
+*/
+	return 0; // stub
+}
+
+
+
+
+
+
+
+
+

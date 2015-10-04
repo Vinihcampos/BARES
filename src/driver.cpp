@@ -2,20 +2,26 @@
 #include <iostream>
 #include <string>
 #include <queue>
+//#include <deque>
 
 using namespace std;
 
-struct Node{
-	string symbol;
-	int index;
-	Node(string _symbol, int _index) : symbol {_symbol}, index {_index}{};
-};
-
 int main(){
+
+	std::queue<Bares::Token> queueToken;
+	//string x = "(2900000ab.= +3) * 8";
+	string x = "***(3        + 5))))";
+	Bares bares;	
 	
-	string x = "(2900000ab.= +3) * 8";
-	queue<Bares::Node> m_queue;
-	queue<Bares::Node> m_queue2;
+	bares.tokenize(x, queueToken);
+	
+	while (!queueToken.empty()) {
+		cout << "Token: "  << (queueToken.front()).symbol << endl;
+		queueToken.pop();
+	}
+
+	/*queue<Bares::Token> m_queue;
+	queue<Bares::Token> m_queue2;
 	Bares b;
 	b.split(x, m_queue);
 	b.infixToPostfix(m_queue, m_queue2);
@@ -29,7 +35,7 @@ int main(){
 	while(!b.errors.empty()){
 		cout<<b.errors.front().first<<", Coluna: "<<b.errors.front().second<<endl;
 		b.errors.pop();
-	}
+	}*/
 
 	return 0;
 }
