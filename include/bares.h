@@ -26,14 +26,14 @@ class Bares{
 
 		
 		enum class ErrorCode {
-			INVALID_NUMBER = 1,
-			LACKING_OPERAND,
-			INVALID_OPERAND,
-			INVALID_OPERATOR,
-			LACKING_OPERATOR,
-			INVALID_SCOPE_CLOSE,
-			UNCLOSED_SCOPE,
-			DIVISION_BY_ZERO
+			INVALID_NUMBER = 1, 	// calculation
+			LACKING_OPERAND,	// calculation
+			INVALID_OPERAND,	// tokenize
+			INVALID_OPERATOR,	// tokenize
+			LACKING_OPERATOR,	// calculation
+			INVALID_SCOPE_CLOSE,	// calculation or infix
+			UNCLOSED_SCOPE,		// calculation or infix
+			DIVISION_BY_ZERO	// calculation
 		};
 
 		enum class TypeSymbol {
@@ -51,9 +51,59 @@ class Bares{
 			Token(int _column, TypeSymbol _type, string _symbol = "") : column (_column), type (_type), symbol (_symbol) {};
 		};
 
-		queue< pair < string, int > > errors;
+		struct Error {
+			ErrorCode cod;
+			Token token;
+			Error(ErrorCode _cod, Token _token) : cod {_cod}, token {_token} {};
+			void print() {
+				cout << "Error at column " << token.column << ": ";
+				string msg;
+				switch(cod) {
+					case ErrorCode::INVALID_NUMBER:
+						msg += "Number constant out of range.";
+						break;
+					case ErrorCode::LACKING_OPERAND:
+						msg += "Valid operand lacking.";
+						break;
+					case ErrorCode::INVALID_OPERAND:
+						msg += "Invalid operand.";
+						break;
+					case ErrorCode::LACKING_OPERATOR:
+						msg += "Valid operator lacking.";
+						break;
+					case ErrorCode::INVALID_OPERATOR:
+						msg += "Invalid operator.";
+						break;
+					case ErrorCode::INVALID_SCOPE_CLOSE:
+						msg += "Invalid scope closing.";
+						break;
+					case ErrorCode::UNCLOSED_SCOPE:
+						msg += "Unclosed scope.";
+						break;
+					case ErrorCode::DIVISION_BY_ZERO:
+						msg += "Division by zero!";
+						break;
+					default:
+						msg += "Unknown error.";
+				}
+				cout << msg << endl;
+			}
+		};
+
+		vector<Error> errors;
 
 	public:
+		/** 
+		 * Print errors.
+		 *
+		 * */
+		void printErrors() {
+			for (Error e : errors) 
+				e.print();
+		}
+
+
+
 		/**
 		*	TODO - Vinícius
 		*	Method that returns the priority of the symbol

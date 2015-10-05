@@ -8,19 +8,19 @@
 using namespace std;
 
 //	Priority method
-int Bares::priority(string _symbol){
-	if(_symbol == "(" || _symbol == ")")
-		return 1;
-	else if(_symbol == "^")
-		return 3;
-	else if(_symbol == "*" || _symbol == "/" || _symbol == "%") 
+int Bares::priority(string op){
+	if(op == "(") 
 		return 4;
-	else if(_symbol == "+" || _symbol == "-")
-		return 5;
-	else if((_symbol[0] >= 'a' && _symbol[0]  <= 'z' ) || (_symbol[0]  >= 'A' && _symbol[0]  <= 'Z' ) )
-		return 6;
-	else 
-		return 7;
+	else if(op == "^")
+		return 3;
+	else if(op == "*" || op == "/" || op == "%") 
+		return 2;
+	else if(op == "+" || op == "-")
+		return 1;
+	else if (op == ")")
+		return 0;
+	else 	
+		return -1;
 }
 
 //	Valid symbol method
@@ -46,109 +46,121 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 	Bares::Token * token = nullptr;
 	int i  = 0;
 	while (i < expression.size()) {
-	/*for (int i = 0; i < expression.size(); ++i) {*/
-		// ignorable
+		// ignore
 		if (expression[i] == ' ') { 
 			++i;
 			continue;
+		}		
+		
+		// if it's a number, check if it's negative in potential based on the preceding symbol
+		bool isNegative = false;
+		if (expression[i] == '-') {
+			// if the preceding element is not an operand or a ')'
+			if (token == nullptr || (!(token->type == TypeSymbol::OPERAND || token->symbol == ")"))) {
+				isNegative = true; // it can be negative, but we need to check the symbol after
+				while (expression[i + 1] == '-' || expression[i] == ' ') i++; // throws out the ' ' and '-' in excess
+			}
 		}
+		
 		// check the type
 		TypeSymbol type = classifySymbol(expression[i]);
 		
+		// new token
 		token = new Bares::Token {i, type};
+	
+		// if it's a negative number in potential
+		if (isNegative) {
+			//check the element after, to see if it's an operand
+			if(classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
+				// we say it's a operand in fact!
+				token->type = TypeSymbol::OPERAND;
+				type = TypeSymbol::OPERAND;
+				token->symbol += "-";
+				// and go to the number
+				++i;
+			}
+		}
 		
 		if (type == TypeSymbol::OPERAND) {
+			// if its an operand, get all the numbers after it and assemble the whole number
 			while (type == TypeSymbol::OPERAND && i < expression.size()) {
 				token->symbol += expression[i];
 				i++;
 				type = classifySymbol(expression[i]);
 			}
+			// if there wasn't any number after the - sign, it is a binary operator, not a unary!
+			if (token->symbol == "-") {
+				token->type = TypeSymbol::OPERATOR;
+			}
 		} else token->symbol += expression[i++];
 		queueToken.push(*token);
 	}
-		/*// if it was a number before, keep that number
-		if (type == TypeSymbol::OPERAND) {	
-			if (token == nullptr)
-				token = new Bares::Token {i, type};
-			token->symbol += expression[i];
-			continue;
-		} else {
-			if (token != nullptr)
-			       queueToken.push(*token);	
-			token = new Bares::Token {i, type};
-			token->symbol += expression[i];
-		}
-		queueToken.push(*token);
-		token = nullptr;
-	}
-	if (token != nullptr) 	
-		queueToken.push(*token);
-	*/
 }
 
+void printQueue(queue<Bares::Token> q){
+	while (!q.empty()) {
+		cout << q.front().symbol << endl;
+		q.pop();
+	}
+	cout << endl;
+}
+
+void printStack(stack<Bares::Token> q){
+	while (!q.empty()) {
+		cout << q.top().symbol << endl;
+		q.pop();
+	}
+	cout << endl;
+}
 //	Infix to postfix method
 //	Verifyng errors:
 //	- 1: Numerical constant is invalid
 //	- 6: Invalid scope closure
 //	- 7: Opened scope	
-void Bares::infixToPostfix(queue<Bares::Token> & _splittedExpression, queue<Bares::Token> & newQueue){
-/*	stack<Bares::Token> stack;
-	while(!_splittedExpression.empty()){
-		if(_splittedExpression.front().symbol.length() > 1){
-			int x = stoi(_splittedExpression.front().symbol, nullptr, 10);
-			if( x < -32767 || x > 32767 ){
-				errors.push({"Numerical constant is invalid", _splittedExpression.front().index});
-			}
-			newQueue.push(_splittedExpression.front());
-			_splittedExpression.pop();
-		}else if( priority(_splittedExpression.front().symbol) == 6 ){
-			newQueue.push(_splittedExpression.front());
-			_splittedExpression.pop();
-		}else{
-			if(stack.empty() || _splittedExpression.front().symbol == "("){
-				stack.push(_splittedExpression.front());
-				_splittedExpression.pop();				
-			}else if(_splittedExpression.front().symbol == ")"){
-				while(stack.top().symbol != "("){
-					newQueue.push(stack.top());
-					stack.pop();
-					if(stack.empty()) {
-						errors.push({"Invalid scope closure", _splittedExpression.front().index});
-						break; // ERRO (VERIFICAD0 DEPOIS)
-					}else if(stack.top().symbol == "(") {
-						stack.pop();
+void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares::Token> & destQueue){
+	stack<Bares::Token> opStack;
+	
+	while (!splittedExpression.empty()) {
+		
+		Bares::Token curToken = splittedExpression.front();
+		
+		switch(curToken.type) {
+			case TypeSymbol::OPERAND:
+				destQueue.push(curToken);
+				break;
+			case TypeSymbol::OPERATOR:
+				bool foundOpenScope = false;
+				while (!opStack.empty() && priority((opStack.top()).symbol) >= priority(curToken.symbol)) {
+					if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
+						destQueue.push(opStack.top());
+					if (curToken.symbol != ")" && opStack.top().symbol == "(") 
 						break;
-					}
+					if (curToken.symbol == ")" && opStack.top().symbol == "(")
+						foundOpenScope = true;
+					opStack.pop();
+					if (foundOpenScope) break;
 				}
-				_splittedExpression.pop();
-			}else{
-				if(!stack.empty()){
-					while(priority(stack.top().symbol) <= priority(_splittedExpression.front().symbol)){
-						if(stack.top().symbol == "("){
-							break;
-						}else{
-							newQueue.push(stack.top());
-							stack.pop();
-						}						
-						if(stack.empty()) break;
-					}
-				}				
-				stack.push(_splittedExpression.front());
-				_splittedExpression.pop();
-			}
+				
+				if (curToken.symbol == ")" && !foundOpenScope)
+					errors.push_back({ErrorCode::INVALID_SCOPE_CLOSE, curToken});
+				
+				opStack.push(curToken);
+				break;
 		}
+		splittedExpression.pop();
 	}
-	while(!stack.empty()){
-		if(stack.top().symbol == "("){
-			errors.push({"Opened scope", stack.top().index});
-		}else{			
-			newQueue.push(stack.top());
-		}
-		stack.pop();
+	while (!opStack.empty()) {
+		if (opStack.top().symbol == "(") 
+			errors.push_back({ErrorCode::UNCLOSED_SCOPE, opStack.top()});
+		
+		if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
+			destQueue.push(opStack.top());
+		opStack.pop();	
 	}
-*/
+	printErrors();
 }
 
+<<<<<<< HEAD
 int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
 /*	Token curSymb; 		// current symbol
 	int op1, op2;		// operands
@@ -240,6 +252,11 @@ bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _sym
 		return false;
 
 	return true;
+=======
+int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
+	// TODO
+	return 0;
+>>>>>>> 15aadf436cb2afa255843f0fa4f611d5374b6dc0
 }
 
 
