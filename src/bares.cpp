@@ -3,6 +3,7 @@
 #include <vector>
 #include <stack>
 #include <queue>
+#include <cmath>
 #include "bares.h"
 
 using namespace std;
@@ -161,9 +162,91 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 	printErrors();
 }
 
-int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
-	// TODO
-	return 0;
+int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
+	stack <	Token > stackOp;
+	Token op1;
+	Token op2;
+	while(!_postFix.empty()){
+		cout<<_postFix.front().symbol<<endl;
+		if(_postFix.front().type == TypeSymbol::OPERATOR){
+			if(!stackOp.empty()){
+				op2 = stackOp.top();
+				stackOp.pop();
+
+				if(!stackOp.empty()){
+					op1 = stackOp.top();
+					stackOp.pop();
+
+					if(realizeOperation(op1, op2, _postFix.front().symbol)){
+						stackOp.push(op1);
+					}
+					else{
+						errors.push_back({ErrorCode::DIVISION_BY_ZERO, op1});
+					}
+				}else{
+					errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
+				}
+			}else{
+				errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
+			}
+		}else{
+			stackOp.push(_postFix.front());
+		}
+		_postFix.pop();
+	}
+	Token result;
+	int first = 0;
+	while(!stackOp.empty()){
+		if(!first){
+			result = stackOp.top();
+			++first;
+		}else{
+			result = stackOp.top();
+			errors.push_back({ErrorCode::LACKING_OPERATOR, stackOp.top()});
+			++first; 
+		}
+		stackOp.pop();
+	}
+
+	if(first == 1){
+		return _result = stoi(result.symbol, nullptr, 10);
+	}
+	else
+		return 0; 
+}
+
+bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _symbol){
+	int _op1 = stoi(op1.symbol, nullptr, 10);
+	int _op2 = stoi(op2.symbol, nullptr, 10);
+	
+	int result;
+	
+	switch(_symbol[0]){
+		case '^':
+			result = pow(_op1, _op2);
+			break;
+		case '*':
+			result = _op1 * _op2;
+			break;
+		case '/': 
+			result = _op1 / _op2;
+			break;
+		case '%':
+			result = _op1 % _op2;
+			break;
+		case '-':
+			result = _op1 - _op2;
+			break;
+		default:
+			result = _op1 + _op2;
+			break;
+	}
+
+	op1.symbol = to_string(result);
+	if( result == 0 && ( _symbol == "/" || _symbol == "%" ) && _op2 == 0)
+		return false;
+
+	return true;
 }
 
 

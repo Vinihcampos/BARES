@@ -165,6 +165,9 @@ class Bares{
 		*
 		**/
 		int analizeExpression(queue<Token> & _postFix, long & _result);
+
+		bool realizeOperation(Token & op1, Token & op2, string _symbol);
+
 };
 
 #endif
