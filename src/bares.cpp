@@ -3,6 +3,7 @@
 #include <vector>
 #include <stack>
 #include <queue>
+#include <cmath>
 #include "bares.h"
 
 using namespace std;
@@ -160,27 +161,12 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 	printErrors();
 }
 
-<<<<<<< HEAD
 int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
-/*	Token curSymb; 		// current symbol
-	int op1, op2;		// operands
-	int res = 0;		// answer
-	stack<int> stackOp; 	// stack of operands
-
-	// there are symbols to be analyzed
-	while (!_postFix.empty()) {
-		curSymb = _postFix.front();	
-		
-		if (curSymb.l
-
-
-		_postFix.pop();
-	}
-*/
 	stack <	Token > stackOp;
 	Token op1;
 	Token op2;
 	while(!_postFix.empty()){
+		cout<<_postFix.front().symbol<<endl;
 		if(_postFix.front().type == TypeSymbol::OPERATOR){
 			if(!stackOp.empty()){
 				op2 = stackOp.top();
@@ -194,19 +180,19 @@ int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
 						stackOp.push(op1);
 					}
 					else{
-						errors.push({ErrorCode::DIVISION_BY_ZERO, op1});
+						errors.push_back({ErrorCode::DIVISION_BY_ZERO, op1});
 					}
 				}else{
-					errors.push({ErrorCode::LACKING_OPERAND, stackOp.top()});
+					errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
 				}
 			}else{
-				errors.push({ErrorCode::LACKING_OPERAND, stackOp.top()});
+				errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
 			}
 		}else{
-			stackOp.push(postfix.top());
+			stackOp.push(_postFix.front());
 		}
+		_postFix.pop();
 	}
-
 	Token result;
 	int first = 0;
 	while(!stackOp.empty()){
@@ -215,36 +201,44 @@ int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
 			++first;
 		}else{
 			result = stackOp.top();
-			errors.push({ErrorCode::LACKING_OPERATOR, stackOp.top()});
+			errors.push_back({ErrorCode::LACKING_OPERATOR, stackOp.top()});
 			++first; 
 		}
+		stackOp.pop();
 	}
 
-	if(first == 1)
-		return stoi(result.symbol, nullptr, 10);
+	if(first == 1){
+		return _result = stoi(result.symbol, nullptr, 10);
+	}
 	else
 		return 0; 
 }
 
 bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _symbol){
-	int _op1 = stoi(_op1.symbol, nullptr, 10);
-	int _op2 = stoi(_op2.symbol, nullptr, 10);
+	int _op1 = stoi(op1.symbol, nullptr, 10);
+	int _op2 = stoi(op2.symbol, nullptr, 10);
 	
 	int result;
 	
-	switch(_symbol){
-		case "^":
+	switch(_symbol[0]){
+		case '^':
 			result = pow(_op1, _op2);
-		case "*":
+			break;
+		case '*':
 			result = _op1 * _op2;
-		case "/": 
+			break;
+		case '/': 
 			result = _op1 / _op2;
-		case "%":
+			break;
+		case '%':
 			result = _op1 % _op2;
-		case "-":
+			break;
+		case '-':
 			result = _op1 - _op2;
+			break;
 		default:
 			result = _op1 + _op2;
+			break;
 	}
 
 	op1.symbol = to_string(result);
@@ -252,11 +246,6 @@ bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _sym
 		return false;
 
 	return true;
-=======
-int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
-	// TODO
-	return 0;
->>>>>>> 15aadf436cb2afa255843f0fa4f611d5374b6dc0
 }
 
 
