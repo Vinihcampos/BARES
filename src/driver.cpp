@@ -18,6 +18,8 @@ int main(){
 	//string x = "2 + 3 - 3";
 	//string x = "2 + 3";
 	//string x = "(-----2 * ------4)";
+	//string x = "(-(";
+	string x = "2-3/(3 * 2 ^ 3)";
 	Bares bares;	
 	
 	bares.tokenize(x, queueToken);

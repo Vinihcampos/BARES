@@ -51,13 +51,14 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 			++i;
 			continue;
 		}		
-		// if its a number, check if it's negative
+		
+		// if it's a number, check if it's negative in potential based on the preceding symbol
 		bool isNegative = false;
 		if (expression[i] == '-') {
-			// if it's not an operand or a ')'
+			// if the preceding element is not an operand or a ')'
 			if (token == nullptr || (!(token->type == TypeSymbol::OPERAND || token->symbol == ")"))) {
-				isNegative = true;
-				while (expression[i + 1] == '-' || expression[i] == ' ') i++;
+				isNegative = true; // it can be negative, but we need to check the symbol after
+				while (expression[i + 1] == '-' || expression[i] == ' ') i++; // throws out the ' ' and '-' in excess
 			}
 		}
 		
@@ -67,40 +68,33 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		// new token
 		token = new Bares::Token {i, type};
 	
-		// if it's a negative number
+		// if it's a negative number in potential
 		if (isNegative) {
-			token->type = TypeSymbol::OPERAND;
-			token->symbol += "-";
-			++i;
+			//check the element after, to see if it's an operand
+			if(classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
+				// we say it's a operand in fact!
+				token->type = TypeSymbol::OPERAND;
+				type = TypeSymbol::OPERAND;
+				token->symbol += "-";
+				// and go to the number
+				++i;
+			}
 		}
 		
-		if (token->type == TypeSymbol::OPERAND) {
+		if (type == TypeSymbol::OPERAND) {
+			// if its an operand, get all the numbers after it and assemble the whole number
 			while (type == TypeSymbol::OPERAND && i < expression.size()) {
 				token->symbol += expression[i];
 				i++;
 				type = classifySymbol(expression[i]);
 			}
+			// if there wasn't any number after the - sign, it is a binary operator, not a unary!
+			if (token->symbol == "-") {
+				token->type = TypeSymbol::OPERATOR;
+			}
 		} else token->symbol += expression[i++];
 		queueToken.push(*token);
 	}
-		/*// if it was a number before, keep that number
-		if (type == TypeSymbol::OPERAND) {	
-			if (token == nullptr)
-				token = new Bares::Token {i, type};
-			token->symbol += expression[i];
-			continue;
-		} else {
-			if (token != nullptr)
-			       queueToken.push(*token);	
-			token = new Bares::Token {i, type};
-			token->symbol += expression[i];
-		}
-		queueToken.push(*token);
-		token = nullptr;
-	}
-	if (token != nullptr) 	
-		queueToken.push(*token);
-	*/
 }
 
 void printQueue(queue<Bares::Token> q){
