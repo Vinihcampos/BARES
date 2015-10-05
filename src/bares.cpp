@@ -246,10 +246,16 @@ bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _sym
 			result = _op1 * _op2;
 			break;
 		case '/': 
-			result = _op1 / _op2;
+			if(_op2 != 0)
+				result = _op1 / _op2;
+			else 
+				result = 0;
 			break;
 		case '%':
-			result = _op1 % _op2;
+			if(_op2 != 0)
+				result = _op1 % _op2;
+			else
+				result = 0;
 			break;
 		case '-':
 			result = _op1 - _op2;
