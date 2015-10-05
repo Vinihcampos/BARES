@@ -149,7 +149,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & _splittedExpression, queue<Bare
 */
 }
 
-int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
+int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
 /*	Token curSymb; 		// current symbol
 	int op1, op2;		// operands
 	int res = 0;		// answer
@@ -165,7 +165,81 @@ int Bares::analizeExpression(queue<Token> & _postFix, long & _result) {
 		_postFix.pop();
 	}
 */
-	return 0; // stub
+	stack <	Token > stackOp;
+	Token op1;
+	Token op2;
+	while(!_postFix.empty()){
+		if(_postFix.front().type == TypeSymbol::OPERATOR){
+			if(!stackOp.empty()){
+				op2 = stackOp.top();
+				stackOp.pop();
+
+				if(!stackOp.empty()){
+					op1 = stackOp.top();
+					stackOp.pop();
+
+					if(realizeOperation(op1, op2, _postFix.front().symbol)){
+						stackOp.push(op1);
+					}
+					else{
+						errors.push({ErrorCode::DIVISION_BY_ZERO, op1});
+					}
+				}else{
+					errors.push({ErrorCode::LACKING_OPERAND, stackOp.top()});
+				}
+			}else{
+				errors.push({ErrorCode::LACKING_OPERAND, stackOp.top()});
+			}
+		}else{
+			stackOp.push(postfix.top());
+		}
+	}
+
+	Token result;
+	int first = 0;
+	while(!stackOp.empty()){
+		if(!first){
+			result = stackOp.top();
+			++first;
+		}else{
+			result = stackOp.top();
+			errors.push({ErrorCode::LACKING_OPERATOR, stackOp.top()});
+			++first; 
+		}
+	}
+
+	if(first == 1)
+		return stoi(result.symbol, nullptr, 10);
+	else
+		return 0; 
+}
+
+bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _symbol){
+	int _op1 = stoi(_op1.symbol, nullptr, 10);
+	int _op2 = stoi(_op2.symbol, nullptr, 10);
+	
+	int result;
+	
+	switch(_symbol){
+		case "^":
+			result = pow(_op1, _op2);
+		case "*":
+			result = _op1 * _op2;
+		case "/": 
+			result = _op1 / _op2;
+		case "%":
+			result = _op1 % _op2;
+		case "-":
+			result = _op1 - _op2;
+		default:
+			result = _op1 + _op2;
+	}
+
+	op1.symbol = to_string(result);
+	if( result == 0 && ( _symbol == "/" || _symbol == "%" ) && _op2 == 0)
+		return false;
+
+	return true;
 }
 
 
