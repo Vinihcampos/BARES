@@ -201,14 +201,7 @@ int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
 						errors.push_back({ErrorCode::DIVISION_BY_ZERO, _postFix.front()});
 					}
 				}else{
-					//Fix error minus
-					if(_postFix.front().symbol == "-"){
-						int _op2 = (-1) * stoi(op2.symbol, nullptr, 10);
-						op2.symbol = to_string(_op2);
-						stackOp.push(op2);
-					}else{
-						errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
-					}
+					errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
 				}
 			}else{
 				errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
