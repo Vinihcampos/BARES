@@ -198,7 +198,7 @@ int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
 						stackOp.push(op1);
 					}
 					else{
-						errors.push_back({ErrorCode::DIVISION_BY_ZERO, op1});
+						errors.push_back({ErrorCode::DIVISION_BY_ZERO, _postFix.front()});
 					}
 				}else{
 					errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
