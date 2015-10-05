@@ -71,7 +71,7 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		// if it's a negative number in potential
 		if (isNegative) {
 			//check the element after, to see if it's an operand
-			if(classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
+			if((i + 1) < expression.size() && classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
 				// we say it's a operand in fact!
 				token->type = TypeSymbol::OPERAND;
 				type = TypeSymbol::OPERAND;
@@ -93,6 +93,7 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 				token->type = TypeSymbol::OPERATOR;
 			}
 		} else token->symbol += expression[i++];
+		// conclude operation, enqueue the new token
 		queueToken.push(*token);
 	}
 }
