@@ -2,11 +2,54 @@
 #include <iostream>
 #include <string>
 #include <queue>
-//#include <deque>
+#include <sstream>
+#include 
 
 using namespace std;
 
-int main(){
+int main(int nargs, char * argsi[]){
+	
+	/*-------------------------------------
+	 * Preparing for reading the input file.
+	 * ------------------------------------*/	
+	// check execution
+	if (argsize == 1) {
+		cerr << "Wrong sintaxe: please provide an input file." << endl;	
+		return 0;
+	}
+	// declaring input stream
+	ifstream ifs;
+	// opening input file
+	ifs.open(argsi[1]); 
+	if (!ifs.is_open()) {
+		cerr << "Unable to open input file." << endl;
+		return 0;
+	}
+	cout << ">>> Input file (" << argsi[1] << ") opened!" << endl;
+	
+	/*-------------------------------------
+	 * Preparing for writing an output file.
+	 * ------------------------------------*/
+	// output stream
+	ofstream ofs; 		
+	// if user wants an output file
+	if (argsize == 3) {
+		ofs.open(argsi[2]);
+		if (!ofs.is_open()) {
+			cerr << "Error on opening output file." << endl;
+			return 0;
+		}
+	}
+	
+	Bares bares;
+
+	//giving the result
+	if (ofs.open) {
+		// TODO
+	} else {
+		// TODO
+	}
+	
 
 	std::queue<Bares::Token> queueToken;
 	std::queue<Bares::Token> queueTokenized;
@@ -28,23 +71,6 @@ int main(){
 		cout << "Token: "  << (queueTokenized.front()).symbol << endl;
 		queueTokenized.pop();
 	}
-
-	/*queue<Bares::Token> m_queue;
-	queue<Bares::Token> m_queue2;
-	Bares b;
-	b.split(x, m_queue);
-	b.infixToPostfix(m_queue, m_queue2);
-	while(!m_queue2.empty()){
-		cout<<m_queue2.front().symbol<<endl;
-		m_queue2.pop();
-	}
-
-	cout<<"--------------------------------------------------"<<endl;
-
-	while(!b.errors.empty()){
-		cout<<b.errors.front().first<<", Coluna: "<<b.errors.front().second<<endl;
-		b.errors.pop();
-	}*/
 
 	return 0;
 }
