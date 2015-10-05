@@ -2,12 +2,11 @@
 #include <iostream>
 #include <string>
 #include <queue>
-#include <sstream>
-#include 
+#include <fstream>
 
 using namespace std;
 
-int main(int nargs, char * argsi[]){
+int main(int argsize, char * argsi[]){
 	
 	/*-------------------------------------
 	 * Preparing for reading the input file.
@@ -40,44 +39,30 @@ int main(int nargs, char * argsi[]){
 			return 0;
 		}
 	}
-	
-	Bares bares;
 
-	//giving the result
-	if (ofs.open) {
-		// TODO
-	} else {
-		// TODO
-	}
-	
+	string line;
+	string output = "";
 
-	std::queue<Bares::Token> queueToken;
-	std::queue<Bares::Token> queueTokenized;
-	//string x = "(2900000ab.= +3) * 8";
-	//string x = "***(3        + 5))))";
-	string x = "((6+3)*2 - (3-2))^(5+2)";
-	//string x = "2^1*1-4+5/3/(2+2)";
-	//string x = "(2+3)*(3-2)";
-	//string x = "2 + 3 - 3";
-	//string x = "2 + 3";
-	//string x = "(-----2 * ------4)";
-	//string x = "(-(";
-	//string x = "2-3/(3 * 2 ^ 3)";
-	Bares bares;	
-	
-	bares.tokenize(x, queueToken);
-	bares.infixToPostfix(queueToken, queueTokenized);
-	long result;
-	bares.analizeExpression(queueTokenized, result);	
-	if(bares.errors.empty())
-		cout<<"Result: "<<result<<endl;
-	else{
-		bares.printErrors();			
+	while (getline(ifs, line)) {
+		Bares bares;
+		int res;
+		if (ofs.is_open())
+			ofs << "Evaluated expression: " << line << endl;
+		else
+			std::cout << "Evaluated expression: " << line << endl;
+
+		if(bares.evaluate(line, res)) {
+			if (ofs.is_open())
+				ofs << res << endl;
+			else
+				cout << res << endl;
+		} else {
+			if (ofs.is_open())
+				bares.printErrors(ofs);
+			else	
+				bares.printErrors(std::cout);
+		}
 	}
-	//while (!queueTokenized.empty()) {
-	//	cout << "Token: "  << (queueTokenized.front()).symbol << endl;
-	//	queueTokenized.pop();
-	//}
 
 	return 0;
 }

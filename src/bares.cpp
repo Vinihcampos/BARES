@@ -8,6 +8,18 @@
 
 using namespace std;
 
+bool Bares::evaluate(string & expression, int & result) {
+	queue<Token> tokens;
+	tokenize(expression, tokens);
+	queue<Token> posfix;
+	infixToPostfix(tokens, posfix);
+	analizeExpression(posfix, result);
+	if (errors.size() > 0) {
+		return false;
+	}
+	return true;
+}
+
 //	Priority method
 int Bares::priority(string op){
 	if(op == "(") 
@@ -130,7 +142,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 			case TypeSymbol::OPERAND:
 				destQueue.push(curToken);
 				break;
-			case TypeSymbol::OPERATOR:
+			case TypeSymbol::OPERATOR: {
 				bool foundOpenScope = false;
 				while (!opStack.empty() && priority((opStack.top()).symbol) >= priority(curToken.symbol)) {
 					if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
@@ -148,6 +160,13 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 				
 				opStack.push(curToken);
 				break;
+			}
+			case TypeSymbol::INVALID_OPERAND:
+				errors.push_back({ErrorCode::INVALID_OPERAND, curToken});
+				break;
+			case TypeSymbol::INVALID_OPERATOR:
+				errors.push_back({ErrorCode::INVALID_OPERATOR, curToken});
+				break;
 		}
 		splittedExpression.pop();
 	}
@@ -159,15 +178,13 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 			destQueue.push(opStack.top());
 		opStack.pop();	
 	}
-	printErrors();
 }
 
-int Bares::analizeExpression(queue<Bares::Token> & _postFix, long & _result) {
+int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
 	stack <	Token > stackOp;
 	Token op1;
 	Token op2;
 	while(!_postFix.empty()){
-		cout<<_postFix.front().symbol<<endl;
 		if(_postFix.front().type == TypeSymbol::OPERATOR){
 			if(!stackOp.empty()){
 				op2 = stackOp.top();

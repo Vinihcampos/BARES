@@ -22,7 +22,7 @@ class Bares{
 		*	@return the result of expression
 		*	
 		**/
-		static long calculate(string & _expression);
+		bool evaluate(string & expression, int & resultado);
 
 		
 		enum class ErrorCode {
@@ -55,9 +55,9 @@ class Bares{
 			ErrorCode cod;
 			Token token;
 			Error(ErrorCode _cod, Token _token) : cod {_cod}, token {_token} {};
-			void print() {
-				cout << "Error at column " << token.column << ": ";
+			string as_string() {
 				string msg;
+				msg += "Error at column " + std::to_string(token.column) + ": ";
 				switch(cod) {
 					case ErrorCode::INVALID_NUMBER:
 						msg += "Number constant out of range.";
@@ -86,7 +86,8 @@ class Bares{
 					default:
 						msg += "Unknown error.";
 				}
-				cout << msg << endl;
+				msg += "\n";
+				return msg;
 			}
 		};
 
@@ -97,9 +98,11 @@ class Bares{
 		 * Print errors.
 		 *
 		 * */
-		void printErrors() {
+		std::ostream & printErrors(std::ostream & out) {
+			out << errors.size() << " errors ocurred!" << endl;
 			for (Error e : errors) 
-				e.print();
+				out << e.as_string();
+			return out;
 		}
 
 
@@ -164,7 +167,7 @@ class Bares{
 		*	- 8: Division by zero
 		*
 		**/
-		int analizeExpression(queue<Token> & _postFix, long & _result);
+		int analizeExpression(queue<Token> & _postFix, int & _result);
 
 		bool realizeOperation(Token & op1, Token & op2, string _symbol);
 
