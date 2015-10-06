@@ -155,7 +155,7 @@ void printStack(Stack<Bares::Token> q){
 void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares::Token> & destQueue){
 	//stack
 	//std::stack<Bares::Token> opStack; 
-	Stack<Bares::Token> opStack {(int)splittedExpression.size()};
+	Stack<Bares::Token> opStack;
 	
 	while (!splittedExpression.empty()) {
 		
