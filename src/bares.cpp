@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <stack>
 #include "stack.h"
 #include "queue.h"
+#include "vector.h"
 #include <cmath>
 #include "bares.h"
 

@@ -2,7 +2,6 @@
 #define _BARES_
 #include <iostream>
 #include <string>
-#include <vector>
 #include "stack.h"
 #include <queue>
 #include "vector.h"
