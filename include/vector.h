@@ -19,40 +19,33 @@ using namespace std;
 // #9: type * const p -> não permite mudar o endereço para o qual o ponteiro aponta
 namespace Greati {
 	
-	const int DEFAULT_SIZE = 1;
+	const int DEFAULT_CAP = 50;
 
 	template<typename T>
 	class Vector {
 		private:
 			T* vecData;
 			int vecSize;
+			int vecCapacity;
 		public:
+		
+			/* Doubles the capacity and keep the data.
+			 *
+			 * */	
+			void doubleData(); 
+			
 			/* + Vector(int)
 			 *
 			 * Constructor: takes the size.
 			 * As parameter is optional, it can be considered
 			 * the default constructor.
 			 * */
-			Vector(int psize = DEFAULT_SIZE);
+			Vector(int _cap = DEFAULT_CAP) : vecCapacity {_cap}, vecSize{0} {
+				if (_cap <= 0)
+					throw std::invalid_argument("Vector:Vector(int, const T&) : Invalid size.");	
+				else vecData = new T[_cap];
+			};
 			
-			/* + Vector(int, T&)
-			 *
-			 * Constructor: takes the size and an initial value.
-			 * */
-			Vector(int psize, const T& initial);
-			
-			/* + Vector(const initializer_list<T> &)
-			 *
-			 * Constructor: takes a list at initialization.
-			 * */
-			Vector(const initializer_list<T> &);
-
-			/* + Vector(Vector)
-			 *
-			 * Construtor cópia.
-			 * */
-			Vector(const Vector &);
-
 			/* + ~Vector()
 			 *
 			 * Destructor method.
@@ -73,6 +66,11 @@ namespace Greati {
 			 * */
 			void fill(const T&);
 
+			/* + push_back(const T&)
+			 *
+			 * Add an element to the end.
+			 * */
+			void push_back(const T &);
 			/* ==================
 			 * Operators overload
 			 * ------------------
@@ -89,5 +87,5 @@ namespace Greati {
 			const Vector& operator=(const initializer_list<T> &);
 	};
 }
-#include "../src/myvector.cpp"
+#include "../src/vector.cpp"
 #endif

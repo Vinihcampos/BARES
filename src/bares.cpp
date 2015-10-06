@@ -209,7 +209,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 }
 
 int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
-	Stack <	Token > stackOp;
+	Stack <Bares::Token> stackOp;
 	Token op1;
 	Token op2;
 	while(!_postFix.empty()){

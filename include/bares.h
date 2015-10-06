@@ -6,6 +6,7 @@
 #include <vector>
 #include "stack.h"
 #include <queue>
+#include "vector.h"
 
 using namespace std;
 
@@ -54,6 +55,7 @@ class Bares{
 		struct Error {
 			ErrorCode cod;
 			Token token;
+			Error(){};
 			Error(ErrorCode _cod, Token _token) : cod {_cod}, token {_token} {};
 			string as_string() {
 				string msg;
@@ -91,7 +93,7 @@ class Bares{
 			}
 		};
 
-		vector<Error> errors;
+		Greati::Vector<Error> errors;
 
 	public:
 		/** 
@@ -100,8 +102,8 @@ class Bares{
 		 * */
 		std::ostream & printErrors(std::ostream & out) {
 			out << errors.size() << " errors ocurred!" << endl;
-			for (Error e : errors) 
-				out << e.as_string();
+			for (int i = 0; i < errors.size(); ++i)
+				out << errors[i].as_string();
 			return out;
 		}
 
