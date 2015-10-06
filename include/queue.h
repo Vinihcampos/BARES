@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 template <typename Data>
-class queue {
+class Queue {
 
 	private:
 		int head;
@@ -13,14 +13,16 @@ class queue {
 		int qsize;
 
 		static const int DEF_SIZE = 20;
+
+		void doubleData();
 	public:
-		queue(const int _size = DEF_SIZE) : qsize {_size}, head {-1}, tail {-1} {
+		Queue(const int _size = DEF_SIZE) : qsize {_size}, head {-1}, tail {-1} {
 			if (qsize > 0)
 				data = new Data[qsize];
 			else
 				throw std::invalid_argument("Please provide a size greater than 0.");
 		}
-		~queue();
+		~Queue();
 		bool push(const Data & _new);
 		const Data & pop();
 		const Data & front() const;

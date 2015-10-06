@@ -1,12 +1,12 @@
 #ifndef _BARES_
 #define _BARES_
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include "stack.h"
 #include <queue>
 #include "vector.h"
+#include "queue.h"
 
 using namespace std;
 
@@ -139,7 +139,7 @@ class Bares{
 		*	@param _word The expression to be splitted
 		*	@return queue<std::string> The queue formed by each element of _word
 		**/
-		void tokenize(string & expression, queue<Token> & queueToken);
+		void tokenize(string & expression, Queue<Token> & queueToken);
 
 		/**
 		*	TODO - Vinicius
@@ -148,7 +148,7 @@ class Bares{
 		*	@param _splittedExpression The queue formed by symbols( operands and opertators )
 		*	@return queue<std::string> The queue _splittedExpression transformed to postfix notation
 		**/
-		void infixToPostfix(queue<Token> & _splittedExpression, queue<Token> & newQueue);
+		void infixToPostfix(Queue<Token> & _splittedExpression, Queue<Token> & newQueue);
 
 		/**
 		*	TODO Vitor
@@ -169,7 +169,7 @@ class Bares{
 		*	- 8: Division by zero
 		*
 		**/
-		int analizeExpression(queue<Token> & _postFix, int & _result);
+		int analizeExpression(Queue<Token> & _postFix, int & _result);
 
 		bool realizeOperation(Token & op1, Token & op2, string _symbol);
 
