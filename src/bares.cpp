@@ -133,7 +133,7 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		} else token->symbol += expression[i++];
 		// conclude operation, enqueue the new token
 		queueToken.push(*token);
-		printQueue(queueToken);
+		//printQueue(queueToken);
 	}
 }
 
@@ -141,7 +141,7 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 
 void printStack(stack<Bares::Token> q){
 	while (!q.empty()) {
-		cout << q.top().symbol << endl;
+		cout << "Token: "<< q.top().symbol << endl;
 		q.pop();
 	}
 	cout << endl;
@@ -165,6 +165,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 			case TypeSymbol::OPERATOR: {
 				bool foundOpenScope = false;
 				while (!opStack.empty() && priority((opStack.top()).symbol) >= priority(curToken.symbol)) {
+					// avoid operators != of ')' to take off "(" elements
 					if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
 						destQueue.push(opStack.top());
 					if (curToken.symbol != ")" && opStack.top().symbol == "(") 
@@ -178,7 +179,8 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 				if (curToken.symbol == ")" && !foundOpenScope)
 					errors.push_back({ErrorCode::INVALID_SCOPE_CLOSE, curToken});
 				
-				opStack.push(curToken);
+				if (curToken.symbol != ")") 
+					opStack.push(curToken);
 				break;
 			}
 			case TypeSymbol::INVALID_OPERAND:
@@ -189,6 +191,8 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 				break;
 		}
 		splittedExpression.pop();
+		printStack(opStack);
+		printQueue(destQueue);
 	}
 	while (!opStack.empty()) {
 		if (opStack.top().symbol == "(") 
@@ -198,6 +202,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 			destQueue.push(opStack.top());
 		opStack.pop();	
 	}
+	printQueue(destQueue);
 }
 
 int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
