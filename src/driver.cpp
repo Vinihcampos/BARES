@@ -41,7 +41,6 @@ int main(int argsize, char * argsi[]){
 	}
 
 	string line;
-	string output = "";
 
 	while (getline(ifs, line)) {
 		Bares bares;
@@ -53,9 +52,9 @@ int main(int argsize, char * argsi[]){
 
 		if(bares.evaluate(line, res)) {
 			if (ofs.is_open())
-				ofs << res << endl;
+				ofs << res << endl<<endl;
 			else
-				cout << res << endl;
+				cout << res << endl<<endl;
 		} else {
 			if (ofs.is_open())
 				bares.printErrors(ofs);

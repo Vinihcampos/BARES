@@ -104,6 +104,7 @@ class Bares{
 			out << errors.size() << " errors ocurred!" << endl;
 			for (int i = 0; i < errors.size(); ++i)
 				out << errors[i].as_string();
+			out << endl;
 			return out;
 		}
 

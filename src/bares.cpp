@@ -12,12 +12,16 @@ using namespace std;
 bool Bares::evaluate(string & expression, int & result) {
 	Queue<Token> tokens(expression.length() * 3);
 	tokenize(expression, tokens);
+
 	Queue<Token> posfix(expression.length() * 3);
 	infixToPostfix(tokens, posfix);
+	
 	analizeExpression(posfix, result);
+	
 	if (errors.size() > 0) {
 		return false;
 	}
+	
 	return true;
 }
 
@@ -151,14 +155,14 @@ void printStack(Stack<Bares::Token> q){
 	}
 	cout << endl;
 }
+
+
 //	Infix to postfix method
 //	Verifyng errors:
 //	- 1: Numerical constant is invalid
 //	- 6: Invalid scope closure
 //	- 7: Opened scope	
 void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares::Token> & destQueue){
-	//stack
-	//std::stack<Bares::Token> opStack; 
 	Stack<Bares::Token> opStack;
 	
 	while (!splittedExpression.empty()) {
@@ -198,8 +202,6 @@ void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares
 				break;
 		}
 		splittedExpression.pop();
-		//printStack(opStack);
-		//printQueue(destQueue);
 	}
 	while (!opStack.empty()) {
 		if (opStack.top().symbol == "(") 
@@ -209,7 +211,6 @@ void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares
 			destQueue.push(opStack.top());
 		opStack.pop();	
 	}
-	//printQueue(destQueue);
 }
 
 int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
@@ -303,12 +304,4 @@ bool Bares::realizeOperation(Bares::Token & op1, Bares::Token & op2, string _sym
 
 	return true;
 }
-
-
-
-
-
-
-
-
 
