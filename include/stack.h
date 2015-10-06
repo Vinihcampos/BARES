@@ -15,8 +15,8 @@ class Stack : public AbsStack<Object> {
 		void doubleData();
 			
 	public:
-		Stack() : AbsStack<Object>(),	
-			  capacity {DEF_CAPACITY},
+		Stack(const int & _cap = 50) : AbsStack<Object>(),	
+			  capacity {_cap},
 	       		  topIndex {0},	
 			  data { new Object[capacity] } {};
 		
