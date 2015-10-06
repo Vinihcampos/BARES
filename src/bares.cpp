@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stack>
+#include "stack.h"
 #include <queue>
 #include <cmath>
 #include "bares.h"
@@ -108,7 +108,9 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		} else token->symbol += expression[i++];
 		// conclude operation, enqueue the new token
 		queueToken.push(*token);
+		delete token;
 	}
+
 }
 
 void printQueue(queue<Bares::Token> q){
@@ -119,7 +121,7 @@ void printQueue(queue<Bares::Token> q){
 	cout << endl;
 }
 
-void printStack(stack<Bares::Token> q){
+void printStack(Stack<Bares::Token> q){
 	while (!q.empty()) {
 		cout << q.top().symbol << endl;
 		q.pop();
@@ -132,7 +134,7 @@ void printStack(stack<Bares::Token> q){
 //	- 6: Invalid scope closure
 //	- 7: Opened scope	
 void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares::Token> & destQueue){
-	stack<Bares::Token> opStack;
+	Stack<Bares::Token> opStack;
 	
 	while (!splittedExpression.empty()) {
 		
@@ -181,7 +183,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 }
 
 int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
-	stack <	Token > stackOp;
+	Stack <	Token > stackOp;
 	Token op1;
 	Token op2;
 	while(!_postFix.empty()){

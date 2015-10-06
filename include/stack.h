@@ -29,6 +29,6 @@ class Stack : public AbsStack<Object> {
 };
 
 // Sorry about this
-#include "../src/Stack.inl"
+#include "../src/stack.inl"
 
 #endif
