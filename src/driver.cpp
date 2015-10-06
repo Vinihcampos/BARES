@@ -62,6 +62,7 @@ int main(int argsize, char * argsi[]){
 				bares.printErrors(std::cout);
 		}
 	}
+	std::cout << "\nEnd of BARES." << endl;
 
 	return 0;
 }
