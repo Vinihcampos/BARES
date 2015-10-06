@@ -51,6 +51,13 @@ Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	return TypeSymbol::INVALID_OPERATOR;
 }
 
+void printQueue(queue<Bares::Token> q){
+	while (!q.empty()) {
+		cout << "Taken: " << q.front().symbol << endl;
+		q.pop();
+	}
+	cout << endl;
+}
 //	Split method
 //	Verifyng errors:
 // 	- 3: Invalid operand
@@ -67,11 +74,15 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		
 		// if it's a number, check if it's negative in potential based on the preceding symbol
 		bool isNegative = false;
+		int qtdMinus = 1;
 		if (expression[i] == '-') {
 			// if the preceding element is not an operand or a ')'
 			if (token == nullptr || (!(token->type == TypeSymbol::OPERAND || token->symbol == ")"))) {
 				isNegative = true; // it can be negative, but we need to check the symbol after
-				while (expression[i + 1] == '-' || expression[i] == ' ') i++; // throws out the ' ' and '-' in excess
+				while (expression[i + 1] == '-' || expression[i + 1] == ' ') {
+				 	if (expression[i + 1] == '-') ++qtdMinus;
+					i++;
+				} // throws out the ' ' and '-' in excess
 			}
 		}
 		
@@ -84,13 +95,27 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		// if it's a negative number in potential
 		if (isNegative) {
 			//check the element after, to see if it's an operand
-			if((i + 1) < expression.size() && classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
-				// we say it's a operand in fact!
-				token->type = TypeSymbol::OPERAND;
-				type = TypeSymbol::OPERAND;
-				token->symbol += "-";
-				// and go to the number
-				++i;
+			if ((i + 1) < expression.size()) { 
+				if(classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
+					// we say it's a operand in fact!
+					token->type = TypeSymbol::OPERAND;
+					type = TypeSymbol::OPERAND;
+					if (qtdMinus % 2 != 0) {
+						token->symbol += "-";
+						// and go to the number
+					}
+					++i;
+				} else if (expression[i + 1] == '(') {
+					if (qtdMinus % 2 != 0) {
+						Bares::Token * t; 
+						t = new Bares::Token {0, TypeSymbol::OPERAND, "-1"};
+						queueToken.push(*t);
+						t = new Bares::Token {0, TypeSymbol::OPERATOR, "*"};
+						queueToken.push(*t);
+					}
+					++i;
+					continue;
+				}
 			}
 		}
 		
@@ -108,16 +133,11 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		} else token->symbol += expression[i++];
 		// conclude operation, enqueue the new token
 		queueToken.push(*token);
+		printQueue(queueToken);
 	}
 }
 
-void printQueue(queue<Bares::Token> q){
-	while (!q.empty()) {
-		cout << q.front().symbol << endl;
-		q.pop();
-	}
-	cout << endl;
-}
+
 
 void printStack(stack<Bares::Token> q){
 	while (!q.empty()) {
