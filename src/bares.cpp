@@ -3,16 +3,16 @@
 #include <vector>
 #include <stack>
 #include "stack.h"
-#include <queue>
+#include "queue.h"
 #include <cmath>
 #include "bares.h"
 
 using namespace std;
 
 bool Bares::evaluate(string & expression, int & result) {
-	queue<Token> tokens;
+	Queue<Token> tokens(expression.length() * 3);
 	tokenize(expression, tokens);
-	queue<Token> posfix;
+	Queue<Token> posfix(expression.length() * 3);
 	infixToPostfix(tokens, posfix);
 	analizeExpression(posfix, result);
 	if (errors.size() > 0) {
@@ -52,7 +52,7 @@ Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	return TypeSymbol::INVALID_OPERATOR;
 }
 
-void printQueue(queue<Bares::Token> q){
+void printQueue(Queue<Bares::Token> q){
 	while (!q.empty()) {
 		cout << "Taken: " << q.front().symbol << endl;
 		q.pop();
@@ -63,7 +63,7 @@ void printQueue(queue<Bares::Token> q){
 //	Verifyng errors:
 // 	- 3: Invalid operand
 //	- 4: Invalid operator
-void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
+void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 	Bares::Token * token = nullptr;
 	int i  = 0;
 	while (i < expression.size()) {
@@ -91,6 +91,8 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 		TypeSymbol type = classifySymbol(expression[i]);
 		
 		// new token
+		if(token != nullptr)
+			delete token;
 		token = new Bares::Token {i, type};
 	
 		// if it's a negative number in potential
@@ -111,8 +113,10 @@ void Bares::tokenize(string & expression, queue<Bares::Token> & queueToken){
 						Bares::Token * t; 
 						t = new Bares::Token {0, TypeSymbol::OPERAND, "-1"};
 						queueToken.push(*t);
+						delete t;
 						t = new Bares::Token {0, TypeSymbol::OPERATOR, "*"};
 						queueToken.push(*t);
+						delete t;
 					}
 					++i;
 					continue;
@@ -152,7 +156,7 @@ void printStack(Stack<Bares::Token> q){
 //	- 1: Numerical constant is invalid
 //	- 6: Invalid scope closure
 //	- 7: Opened scope	
-void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares::Token> & destQueue){
+void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares::Token> & destQueue){
 	//stack
 	//std::stack<Bares::Token> opStack; 
 	Stack<Bares::Token> opStack;
@@ -208,7 +212,7 @@ void Bares::infixToPostfix(queue<Bares::Token> & splittedExpression, queue<Bares
 	//printQueue(destQueue);
 }
 
-int Bares::analizeExpression(queue<Bares::Token> & _postFix, int & _result) {
+int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
 	Stack <	Token > stackOp;
 	Token op1;
 	Token op2;

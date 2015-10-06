@@ -1,7 +1,7 @@
 #include "bares.h"
 #include <iostream>
 #include <string>
-#include <queue>
+#include "queue.h"
 #include <fstream>
 
 using namespace std;
