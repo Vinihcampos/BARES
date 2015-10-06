@@ -1,0 +1,63 @@
+\hypertarget{structBares_1_1Error}{}\section{Bares\+:\+:Error Struct Reference}
+\label{structBares_1_1Error}\index{Bares\+::\+Error@{Bares\+::\+Error}}
+
+
+This struct is instanciated when an error is detected. It has a code and the problematic token.  
+
+
+
+
+{\ttfamily \#include $<$bares.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structBares_1_1Error_a0f41c23a4131601bd3a40b3da437aff3}{Error} ()\hypertarget{structBares_1_1Error_a0f41c23a4131601bd3a40b3da437aff3}{}\label{structBares_1_1Error_a0f41c23a4131601bd3a40b3da437aff3}
+
+\begin{DoxyCompactList}\small\item\em Basic constructor. \end{DoxyCompactList}\item 
+\hyperlink{structBares_1_1Error_ac6923532df1536c5d45743bc1e254e80}{Error} (\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44}{Error\+Code} \+\_\+cod, \hyperlink{structBares_1_1Token}{Token} \+\_\+token)\hypertarget{structBares_1_1Error_ac6923532df1536c5d45743bc1e254e80}{}\label{structBares_1_1Error_ac6923532df1536c5d45743bc1e254e80}
+
+\begin{DoxyCompactList}\small\item\em Constructor that accepts the code and the token, making error creation a lot easier. \end{DoxyCompactList}\item 
+string \hyperlink{structBares_1_1Error_a1c87f5fbdb64538f5b61647691dd4326}{as\+\_\+string} ()
+\begin{DoxyCompactList}\small\item\em Returns error\textquotesingle{}s message based on it\textquotesingle{}s code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44}{Error\+Code} \hyperlink{structBares_1_1Error_a1aee8c1fc0890dc5cad59487f4ce24c3}{cod}
+\item 
+\hyperlink{structBares_1_1Token}{Token} \hyperlink{structBares_1_1Error_ac7804e7cdb26d8132000ec7587db2e67}{token}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This struct is instanciated when an error is detected. It has a code and the problematic token. 
+
+\subsection{Member Function Documentation}
+\index{Bares\+::\+Error@{Bares\+::\+Error}!as\+\_\+string@{as\+\_\+string}}
+\index{as\+\_\+string@{as\+\_\+string}!Bares\+::\+Error@{Bares\+::\+Error}}
+\subsubsection[{as\+\_\+string()}]{\setlength{\rightskip}{0pt plus 5cm}string Bares\+::\+Error\+::as\+\_\+string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structBares_1_1Error_a1c87f5fbdb64538f5b61647691dd4326}{}\label{structBares_1_1Error_a1c87f5fbdb64538f5b61647691dd4326}
+
+
+Returns error\textquotesingle{}s message based on it\textquotesingle{}s code. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{structBares_1_1Error}{Error}\textquotesingle{}s message. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Bares\+::\+Error@{Bares\+::\+Error}!cod@{cod}}
+\index{cod@{cod}!Bares\+::\+Error@{Bares\+::\+Error}}
+\subsubsection[{cod}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Error\+Code} Bares\+::\+Error\+::cod}\hypertarget{structBares_1_1Error_a1aee8c1fc0890dc5cad59487f4ce24c3}{}\label{structBares_1_1Error_a1aee8c1fc0890dc5cad59487f4ce24c3}
+\hyperlink{structBares_1_1Error}{Error}\textquotesingle{}s code. \index{Bares\+::\+Error@{Bares\+::\+Error}!token@{token}}
+\index{token@{token}!Bares\+::\+Error@{Bares\+::\+Error}}
+\subsubsection[{token}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Token} Bares\+::\+Error\+::token}\hypertarget{structBares_1_1Error_ac7804e7cdb26d8132000ec7587db2e67}{}\label{structBares_1_1Error_ac7804e7cdb26d8132000ec7587db2e67}
+The problematic token. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/bares.\+h\end{DoxyCompactItemize}

@@ -25,7 +25,6 @@ bool Bares::evaluate(string & expression, int & result) {
 	return true;
 }
 
-//	Priority method
 int Bares::priority(string op){
 	if(op == "(") 
 		return 4;
@@ -41,7 +40,6 @@ int Bares::priority(string op){
 		return -1;
 }
 
-//	Valid symbol method
 Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	if( _symbol >= '0' && _symbol <= '9' ){
 		return TypeSymbol::OPERAND;
@@ -63,10 +61,7 @@ void printQueue(Queue<Bares::Token> q){
 	}
 	cout << endl;
 }
-//	Split method
-//	Verifyng errors:
-// 	- 3: Invalid operand
-//	- 4: Invalid operator
+
 void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 	Bares::Token * token = nullptr;
 	int i  = 0;
@@ -156,12 +151,6 @@ void printStack(Stack<Bares::Token> q){
 	cout << endl;
 }
 
-
-//	Infix to postfix method
-//	Verifyng errors:
-//	- 1: Numerical constant is invalid
-//	- 6: Invalid scope closure
-//	- 7: Opened scope	
 void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares::Token> & destQueue){
 	Stack<Bares::Token> opStack;
 	

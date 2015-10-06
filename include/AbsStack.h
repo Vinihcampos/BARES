@@ -29,6 +29,11 @@
 // std::underflow_error thrown if needed.
 
 template <class Object>
+
+/**
+ * \brief Abstract class for Stack implementation.
+ * \author Selan R. dos Santos.
+ * */
 class AbsStack
 {
   public:
