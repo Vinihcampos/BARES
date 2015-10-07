@@ -3,41 +3,41 @@
 
 using namespace std;
 
-// #1: não precisaria declarar private, pois é padrão
-// #2: os membros podem ser implementados diretamente na classe (inline) ou
-// fora dela, usando o operador de escopo (normal)
-// #3: o construtor não tem retorno e possui o mesmo nome da classe
-// ele sempre inicializa o objeto, não podendo ser chamado como uma
-// função normal
-// #4: o construtor padrão é o que é chamado quando se faz simplesmente MyVector vec;
-// #5: seria possivel usar a keyword struct para classes, com a diferença de que
-// o escopo padrão é public, em vez de private
-// #6: seria possível usar a keyword union também, mas só guardaria um membro de dado
-// por vez, apesar de ainda poder definir membros de funções em seu interior.
-// #7: para a sobrecarga de operadores
-// #8: (const type) * p -> não permite modificar os dados através do ponteiro
-// #9: type * const p -> não permite mudar o endereço para o qual o ponteiro aponta
+/**
+ * \brief Indicates classes constructed by Vitor Greati.
+ * */
 namespace Greati {
 	
-	const int DEFAULT_CAP = 50;
 
 	template<typename T>
+	/**
+	 *  \brief A simple ArrayList implementation.
+	 * 
+	 * \details ArrayList with a few methods, useful for
+	 * BARES project mainly.
+	 *
+	 * @author Vitor Greati
+	 * @version 1.1
+	 * */
 	class Vector {
-		private:
-			T* vecData;
-			int vecSize;
-			int vecCapacity;
-		public:
 		
-			/* Doubles the capacity and keep the data.
-			 *
+		
+		private:
+			static const int DEFAULT_CAP = 50; /**< The default capacity of the list.*/
+			
+			T* vecData; 			   /**< Pointer to the data.*/ 
+			int vecSize;			   /**< Logical size of the list.*/
+			int vecCapacity;		   /**< Size of the list in memory. */
+			
+			/** \brief Doubles the capacity and keep the data.
 			 * */	
 			void doubleData(); 
 			
-			/* + Vector(int)
-			 *
-			 * Constructor: takes the size.
-			 * As parameter is optional, it can be considered
+			public:
+				
+			/** 
+			 * \brief Constructor: takes the size.
+			 * \details As parameter is optional, it can be considered
 			 * the default constructor.
 			 * */
 			Vector(int _cap = DEFAULT_CAP) : vecCapacity {_cap}, vecSize{0} {
@@ -46,44 +46,49 @@ namespace Greati {
 				else vecData = new T[_cap];
 			};
 			
-			/* + ~Vector()
-			 *
-			 * Destructor method.
+			 /**
+			 * \brief Destructor method.
 			 * */
 			~Vector(void);
 
-			/* + int size(void) const
-			 * 
-			 * Returns the size of member data.
-			 * Here, "const" means that the function is not allowed
-			 * to change members' values.
+			/** 
+			 * \brief Returns the logical size of the list.
 			 * */
 			int size(void) const;
 
-			/* + fill(const T&)
-			 *
-			 * Fill vector with a value.
+			/**
+			 * \brief Fill vector with a value.
 			 * */
 			void fill(const T&);
 
-			/* + push_back(const T&)
-			 *
-			 * Add an element to the end.
+			/**
+			 * \brief Add an element to the end.
 			 * */
 			void push_back(const T &);
-			/* ==================
-			 * Operators overload
-			 * ------------------
-			 * */
-			// AssigAt operador
+
+			/** 
+			 * \brief AssigAt operador
+			 */
 			T& operator[](int);
-			// At operator
+			
+			/**
+			 * \brief At operator.
+			 * */
 			const T operator[](int) const;
-			// Equals operator
+			
+			/**
+			 * \brief Equals operator.
+			 * */
 			bool operator==(const Vector &) const;
-		        // Assign operator
+		        
+			/**
+			 * \brief Assign operator.
+			 * */
 			const Vector& operator=(const Vector &);	
-			// Assign list operator
+			
+			/**
+			 * \brief Assign list operator.
+			 * */
 			const Vector& operator=(const initializer_list<T> &);
 	};
 }

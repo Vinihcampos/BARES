@@ -1,0 +1,319 @@
+\hypertarget{classBares}{}\section{Bares Class Reference}
+\label{classBares}\index{Bares@{Bares}}
+
+
+Main class of B\+A\+R\+ES.  
+
+
+
+
+{\ttfamily \#include $<$bares.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structBares_1_1Error}{Error}
+\begin{DoxyCompactList}\small\item\em This struct is instanciated when an error is detected. It has a code and the problematic token. \end{DoxyCompactList}\item 
+struct \hyperlink{structBares_1_1Token}{Token}
+\begin{DoxyCompactList}\small\item\em Struct that represents each element inside an expression. It can be an operand or an operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44}{Error\+Code} \{ \\*
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a077915ac2c681ed3c2e5143fa6855abc}{Error\+Code\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER} = 1, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44ae8480abe361722c6fc560d57a8751712}{Error\+Code\+::\+L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND}, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a6bf179afa8f7fba18cf39bc0ca6fe043}{Error\+Code\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a29b8e189abb3870e81dcf17ffcbf1f31}{Error\+Code\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}, 
+\\*
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a22bca2cdebe774eae0632624429e990d}{Error\+Code\+::\+L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR}, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a9f3ccb0df8d33fb668e9473f6bd04a35}{Error\+Code\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE}, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44ae664084bba857b2c43cb86f844efdb04}{Error\+Code\+::\+U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE}, 
+\hyperlink{classBares_ad484a97e0efc1721d2b95209a1700e44a5e807fe8929e4974ec886390b3832033}{Error\+Code\+::\+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO}
+ \}\begin{DoxyCompactList}\small\item\em Enum that contains codes representing all kinds of errors that can happen. It\textquotesingle{}s used to select the correct message to be displayed when the error occur. \end{DoxyCompactList}
+\item 
+enum \hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8}{Type\+Symbol} \{ \hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8a11f3de9b2b548c31805cf34d512ee177}{Type\+Symbol\+::\+O\+P\+E\+R\+A\+ND}, 
+\hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8a986496ca5b23669b8661171566a167c3}{Type\+Symbol\+::\+O\+P\+E\+R\+A\+T\+OR}, 
+\hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8a6bf179afa8f7fba18cf39bc0ca6fe043}{Type\+Symbol\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}, 
+\hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8a29b8e189abb3870e81dcf17ffcbf1f31}{Type\+Symbol\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}
+ \}\begin{DoxyCompactList}\small\item\em Enum that represents possible types of symbols. It\textquotesingle{}s used in verifications and to classify tokens. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classBares_a395824ed99727d00c9ff173982d1957f}{evaluate} (string \&expression, int \&result)
+\begin{DoxyCompactList}\small\item\em Evaluates a given expression. \end{DoxyCompactList}\item 
+std\+::ostream \& \hyperlink{classBares_a9ad20c39973cfbe8273f0dd85c65decc}{print\+Errors} (std\+::ostream \&out)
+\begin{DoxyCompactList}\small\item\em Print errors. \end{DoxyCompactList}\item 
+int \hyperlink{classBares_a9c1ac2f11c3d72d7e234cca8c7c92758}{priority} (string \+\_\+symbol)
+\begin{DoxyCompactList}\small\item\em Method that returns the priority order of a given symbol. \end{DoxyCompactList}\item 
+\hyperlink{classBares_a656cd507b0ddaa049dc7e6548459b6d8}{Type\+Symbol} \hyperlink{classBares_a1e097462a866c6a79eec5ab23c24099f}{classify\+Symbol} (char \+\_\+symbol)
+\begin{DoxyCompactList}\small\item\em Classify a symbol in operand or operator (valid or invalid). \end{DoxyCompactList}\item 
+void \hyperlink{classBares_a06e74726ac52890aa2c8665c01f23701}{tokenize} (string \&expression, \hyperlink{classQueue}{Queue}$<$ \hyperlink{structBares_1_1Token}{Token} $>$ \&queue\+Token)
+\begin{DoxyCompactList}\small\item\em Method that splits the expression element by element, making tokens. \end{DoxyCompactList}\item 
+void \hyperlink{classBares_a9e4e33a9e2d2d9e67708c2aafe31f72f}{infix\+To\+Postfix} (\hyperlink{classQueue}{Queue}$<$ \hyperlink{structBares_1_1Token}{Token} $>$ \&\+\_\+splitted\+Expression, \hyperlink{classQueue}{Queue}$<$ \hyperlink{structBares_1_1Token}{Token} $>$ \&new\+Queue)
+\begin{DoxyCompactList}\small\item\em Method to transform infix notation to postfix notation. \end{DoxyCompactList}\item 
+int \hyperlink{classBares_a8915cf42bc7a36085f1a5bda21cc2258}{analize\+Expression} (\hyperlink{classQueue}{Queue}$<$ \hyperlink{structBares_1_1Token}{Token} $>$ \&\+\_\+post\+Fix, int \&\+\_\+result)
+\begin{DoxyCompactList}\small\item\em Method that analizes the expression stored in \+\_\+post\+Fix and realize the computation, if the expression is ok. \end{DoxyCompactList}\item 
+bool \hyperlink{classBares_a4cf327759f7f057ddc4d426be5dc14e9}{realize\+Operation} (\hyperlink{structBares_1_1Token}{Token} \&op1, \hyperlink{structBares_1_1Token}{Token} \&op2, string \+\_\+symbol)
+\begin{DoxyCompactList}\small\item\em Performs a mathematical operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGreati_1_1Vector}{Greati\+::\+Vector}$<$ \hyperlink{structBares_1_1Error}{Error} $>$ \hyperlink{classBares_a094796228fccdb1ce41ab8ab6c2a2a4c}{errors}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main class of B\+A\+R\+ES. 
+
+It has all the necessary operations to evaluate mathematical expressions following B\+A\+R\+ES features\+:
+\begin{DoxyItemize}
+\item support to +, -\/, /, $\ast$, \% operations
+\item accepts negative numbers as valid operands
+\item support to scope definition using parenthesis
+\end{DoxyItemize}
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Authors}
+Vinicius Campos Tinoco Ribeiro, Vitor Rodrigues \hyperlink{namespaceGreati}{Greati} 
+\end{DoxyAuthor}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Bares@{Bares}!Error\+Code@{Error\+Code}}
+\index{Error\+Code@{Error\+Code}!Bares@{Bares}}
+\subsubsection[{Error\+Code}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Bares\+::\+Error\+Code}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44}
+
+
+Enum that contains codes representing all kinds of errors that can happen. It\textquotesingle{}s used to select the correct message to be displayed when the error occur. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER@{I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER@{I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+N\+U\+M\+B\+ER\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a077915ac2c681ed3c2e5143fa6855abc}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a077915ac2c681ed3c2e5143fa6855abc}
+}]Thrown when a number out of range is passed. \index{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND@{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND}!Bares@{Bares}}\index{Bares@{Bares}!L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND@{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND}}\item[{\em 
+L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+ND\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44ae8480abe361722c6fc560d57a8751712}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44ae8480abe361722c6fc560d57a8751712}
+}]There is a missing operand. \index{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a6bf179afa8f7fba18cf39bc0ca6fe043}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a6bf179afa8f7fba18cf39bc0ca6fe043}
+}]There is an invalid operand (\char`\"{}a\char`\"{}, for example) \index{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a29b8e189abb3870e81dcf17ffcbf1f31}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a29b8e189abb3870e81dcf17ffcbf1f31}
+}]There is an invalid operator (\char`\"{}=\char`\"{}, for example) \index{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR}!Bares@{Bares}}\index{Bares@{Bares}!L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}\item[{\em 
+L\+A\+C\+K\+I\+N\+G\+\_\+\+O\+P\+E\+R\+A\+T\+OR\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a22bca2cdebe774eae0632624429e990d}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a22bca2cdebe774eae0632624429e990d}
+}]There is a missing operator \index{I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE@{I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+C\+O\+P\+E\+\_\+\+C\+L\+O\+SE\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a9f3ccb0df8d33fb668e9473f6bd04a35}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a9f3ccb0df8d33fb668e9473f6bd04a35}
+}]Closing a non-\/opened scope. \index{U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE@{U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE}!Bares@{Bares}}\index{Bares@{Bares}!U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE@{U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE}}\item[{\em 
+U\+N\+C\+L\+O\+S\+E\+D\+\_\+\+S\+C\+O\+PE\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44ae664084bba857b2c43cb86f844efdb04}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44ae664084bba857b2c43cb86f844efdb04}
+}]A scope was left open. \index{D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO@{D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO}!Bares@{Bares}}\index{Bares@{Bares}!D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO@{D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO}}\item[{\em 
+D\+I\+V\+I\+S\+I\+O\+N\+\_\+\+B\+Y\+\_\+\+Z\+E\+RO\hypertarget{classBares_ad484a97e0efc1721d2b95209a1700e44a5e807fe8929e4974ec886390b3832033}{}\label{classBares_ad484a97e0efc1721d2b95209a1700e44a5e807fe8929e4974ec886390b3832033}
+}]A division by zero ocurred! \end{description}
+\end{Desc}
+\index{Bares@{Bares}!Type\+Symbol@{Type\+Symbol}}
+\index{Type\+Symbol@{Type\+Symbol}!Bares@{Bares}}
+\subsubsection[{Type\+Symbol}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Bares\+::\+Type\+Symbol}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{classBares_a656cd507b0ddaa049dc7e6548459b6d8}{}\label{classBares_a656cd507b0ddaa049dc7e6548459b6d8}
+
+
+Enum that represents possible types of symbols. It\textquotesingle{}s used in verifications and to classify tokens. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\+P\+E\+R\+A\+ND@{O\+P\+E\+R\+A\+ND}!Bares@{Bares}}\index{Bares@{Bares}!O\+P\+E\+R\+A\+ND@{O\+P\+E\+R\+A\+ND}}\item[{\em 
+O\+P\+E\+R\+A\+ND\hypertarget{classBares_a656cd507b0ddaa049dc7e6548459b6d8a11f3de9b2b548c31805cf34d512ee177}{}\label{classBares_a656cd507b0ddaa049dc7e6548459b6d8a11f3de9b2b548c31805cf34d512ee177}
+}]It is a valid operand. \index{O\+P\+E\+R\+A\+T\+OR@{O\+P\+E\+R\+A\+T\+OR}!Bares@{Bares}}\index{Bares@{Bares}!O\+P\+E\+R\+A\+T\+OR@{O\+P\+E\+R\+A\+T\+OR}}\item[{\em 
+O\+P\+E\+R\+A\+T\+OR\hypertarget{classBares_a656cd507b0ddaa049dc7e6548459b6d8a986496ca5b23669b8661171566a167c3}{}\label{classBares_a656cd507b0ddaa049dc7e6548459b6d8a986496ca5b23669b8661171566a167c3}
+}]It is a valid operator. \index{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+ND\hypertarget{classBares_a656cd507b0ddaa049dc7e6548459b6d8a6bf179afa8f7fba18cf39bc0ca6fe043}{}\label{classBares_a656cd507b0ddaa049dc7e6548459b6d8a6bf179afa8f7fba18cf39bc0ca6fe043}
+}]It is an invalid operand. \index{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}!Bares@{Bares}}\index{Bares@{Bares}!I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR@{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}\item[{\em 
+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+P\+E\+R\+A\+T\+OR\hypertarget{classBares_a656cd507b0ddaa049dc7e6548459b6d8a29b8e189abb3870e81dcf17ffcbf1f31}{}\label{classBares_a656cd507b0ddaa049dc7e6548459b6d8a29b8e189abb3870e81dcf17ffcbf1f31}
+}]It is an invalid operator. \end{description}
+\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{Bares@{Bares}!analize\+Expression@{analize\+Expression}}
+\index{analize\+Expression@{analize\+Expression}!Bares@{Bares}}
+\subsubsection[{analize\+Expression(\+Queue$<$ Token $>$ \&\+\_\+post\+Fix, int \&\+\_\+result)}]{\setlength{\rightskip}{0pt plus 5cm}int Bares\+::analize\+Expression (
+\begin{DoxyParamCaption}
+\item[{{\bf Queue}$<$ {\bf Token} $>$ \&}]{\+\_\+post\+Fix, }
+\item[{int \&}]{\+\_\+result}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a8915cf42bc7a36085f1a5bda21cc2258}{}\label{classBares_a8915cf42bc7a36085f1a5bda21cc2258}
+
+
+Method that analizes the expression stored in \+\_\+post\+Fix and realize the computation, if the expression is ok. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+post\+Fix} & The queue formed by tokens( operands and operators ) in posfix notation. \\
+\hline
+{\em \+\_\+result} & Stores the result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!classify\+Symbol@{classify\+Symbol}}
+\index{classify\+Symbol@{classify\+Symbol}!Bares@{Bares}}
+\subsubsection[{classify\+Symbol(char \+\_\+symbol)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bares\+::\+Type\+Symbol} Bares\+::classify\+Symbol (
+\begin{DoxyParamCaption}
+\item[{char}]{\+\_\+symbol}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a1e097462a866c6a79eec5ab23c24099f}{}\label{classBares_a1e097462a866c6a79eec5ab23c24099f}
+
+
+Classify a symbol in operand or operator (valid or invalid). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+symbol} & Symbol to classify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of that symbol. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Bares@{Bares}}
+\subsubsection[{evaluate(string \&expression, int \&result)}]{\setlength{\rightskip}{0pt plus 5cm}bool Bares\+::evaluate (
+\begin{DoxyParamCaption}
+\item[{string \&}]{expression, }
+\item[{int \&}]{result}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a395824ed99727d00c9ff173982d1957f}{}\label{classBares_a395824ed99727d00c9ff173982d1957f}
+
+
+Evaluates a given expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expression} & An expression to be evaluated. \\
+\hline
+{\em result} & Receives the result, if no errors ocurred. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false, if some error happened, true if there were not errors. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!infix\+To\+Postfix@{infix\+To\+Postfix}}
+\index{infix\+To\+Postfix@{infix\+To\+Postfix}!Bares@{Bares}}
+\subsubsection[{infix\+To\+Postfix(\+Queue$<$ Token $>$ \&\+\_\+splitted\+Expression, Queue$<$ Token $>$ \&new\+Queue)}]{\setlength{\rightskip}{0pt plus 5cm}void Bares\+::infix\+To\+Postfix (
+\begin{DoxyParamCaption}
+\item[{{\bf Queue}$<$ {\bf Token} $>$ \&}]{\+\_\+splitted\+Expression, }
+\item[{{\bf Queue}$<$ {\bf Token} $>$ \&}]{new\+Queue}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a9e4e33a9e2d2d9e67708c2aafe31f72f}{}\label{classBares_a9e4e33a9e2d2d9e67708c2aafe31f72f}
+
+
+Method to transform infix notation to postfix notation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+splitted\+Expression} & The queue formed with tokens. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The queue \+\_\+splitted\+Expression transformed to postfix notation. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!print\+Errors@{print\+Errors}}
+\index{print\+Errors@{print\+Errors}!Bares@{Bares}}
+\subsubsection[{print\+Errors(std\+::ostream \&out)}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& Bares\+::print\+Errors (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{out}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classBares_a9ad20c39973cfbe8273f0dd85c65decc}{}\label{classBares_a9ad20c39973cfbe8273f0dd85c65decc}
+
+
+Print errors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & Output stream used to print the errors. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The output strema. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!priority@{priority}}
+\index{priority@{priority}!Bares@{Bares}}
+\subsubsection[{priority(string \+\_\+symbol)}]{\setlength{\rightskip}{0pt plus 5cm}int Bares\+::priority (
+\begin{DoxyParamCaption}
+\item[{string}]{\+\_\+symbol}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a9c1ac2f11c3d72d7e234cca8c7c92758}{}\label{classBares_a9c1ac2f11c3d72d7e234cca8c7c92758}
+
+
+Method that returns the priority order of a given symbol. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+symbol} & The symbol to analize. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a number of priority\+:
+\begin{DoxyItemize}
+\item 0\+: \char`\"{})\char`\"{}
+\item 1\+: \char`\"{}+\char`\"{}, \char`\"{}-\/\char`\"{}
+\item 2\+: \char`\"{}$\ast$\char`\"{}, \char`\"{}/\char`\"{}, \char`\"{}\%\char`\"{}
+\item 3\+: \char`\"{}$^\wedge$\char`\"{}
+\item 4\+: \char`\"{}(\char`\"{}
+\item -\/1\+: invalid symbol 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\index{Bares@{Bares}!realize\+Operation@{realize\+Operation}}
+\index{realize\+Operation@{realize\+Operation}!Bares@{Bares}}
+\subsubsection[{realize\+Operation(\+Token \&op1, Token \&op2, string \+\_\+symbol)}]{\setlength{\rightskip}{0pt plus 5cm}bool Bares\+::realize\+Operation (
+\begin{DoxyParamCaption}
+\item[{{\bf Bares\+::\+Token} \&}]{op1, }
+\item[{{\bf Bares\+::\+Token} \&}]{op2, }
+\item[{string}]{\+\_\+symbol}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a4cf327759f7f057ddc4d426be5dc14e9}{}\label{classBares_a4cf327759f7f057ddc4d426be5dc14e9}
+
+
+Performs a mathematical operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em op1} & First operand. \\
+\hline
+{\em op2} & Second operand. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the operation was well succeeded. 
+\end{DoxyReturn}
+\index{Bares@{Bares}!tokenize@{tokenize}}
+\index{tokenize@{tokenize}!Bares@{Bares}}
+\subsubsection[{tokenize(string \&expression, Queue$<$ Token $>$ \&queue\+Token)}]{\setlength{\rightskip}{0pt plus 5cm}void Bares\+::tokenize (
+\begin{DoxyParamCaption}
+\item[{string \&}]{expression, }
+\item[{{\bf Queue}$<$ {\bf Token} $>$ \&}]{queue\+Token}
+\end{DoxyParamCaption}
+)}\hypertarget{classBares_a06e74726ac52890aa2c8665c01f23701}{}\label{classBares_a06e74726ac52890aa2c8665c01f23701}
+
+
+Method that splits the expression element by element, making tokens. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expression} & The expression to be splitted / tokenized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Queue$<$std\+::\+Token$>$ The queue formed by all tokens. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Bares@{Bares}!errors@{errors}}
+\index{errors@{errors}!Bares@{Bares}}
+\subsubsection[{errors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Greati\+::\+Vector}$<${\bf Error}$>$ Bares\+::errors}\hypertarget{classBares_a094796228fccdb1ce41ab8ab6c2a2a4c}{}\label{classBares_a094796228fccdb1ce41ab8ab6c2a2a4c}
+List that stores all erros during execution. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/bares.\+h\item 
+src/bares.\+cpp\end{DoxyCompactItemize}

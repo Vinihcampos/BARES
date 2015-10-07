@@ -25,7 +25,6 @@ bool Bares::evaluate(string & expression, int & result) {
 	return true;
 }
 
-//	Priority method
 int Bares::priority(string op){
 	if(op == "(") 
 		return 4;
@@ -41,7 +40,6 @@ int Bares::priority(string op){
 		return -1;
 }
 
-//	Valid symbol method
 Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	if( _symbol >= '0' && _symbol <= '9' ){
 		return TypeSymbol::OPERAND;
@@ -56,17 +54,6 @@ Bares::TypeSymbol Bares::classifySymbol(char _symbol){
 	return TypeSymbol::INVALID_OPERATOR;
 }
 
-void printQueue(Queue<Bares::Token> q){
-	while (!q.empty()) {
-		cout << "Taken: " << q.front().symbol << endl;
-		q.pop();
-	}
-	cout << endl;
-}
-//	Split method
-//	Verifyng errors:
-// 	- 3: Invalid operand
-//	- 4: Invalid operator
 void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 	Bares::Token * token = nullptr;
 	int i  = 0;
@@ -84,10 +71,11 @@ void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 			// if the preceding element is not an operand or a ')'
 			if (token == nullptr || (!(token->type == TypeSymbol::OPERAND || token->symbol == ")"))) {
 				isNegative = true; // it can be negative, but we need to check the symbol after
+				// count number of "-" signs
 				while (expression[i + 1] == '-' || expression[i + 1] == ' ') {
 				 	if (expression[i + 1] == '-') ++qtdMinus;
 					i++;
-				} // throws out the ' ' and '-' in excess
+				} 
 			}
 		}
 		
@@ -101,18 +89,21 @@ void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 	
 		// if it's a negative number in potential
 		if (isNegative) {
-			//check the element after, to see if it's an operand
 			if ((i + 1) < expression.size()) { 
+				//check the element after, to see if it's an operand
 				if(classifySymbol(expression[i + 1]) == TypeSymbol::OPERAND) {
 					// we say it's a operand in fact!
 					token->type = TypeSymbol::OPERAND;
 					type = TypeSymbol::OPERAND;
+					// if it's negative in fact
 					if (qtdMinus % 2 != 0) {
 						token->symbol += "-";
-						// and go to the number
 					}
+					// go to the number
 					++i;
+				// when the situation is (-(, for example
 				} else if (expression[i + 1] == '(') {
+					// if negative in fact
 					if (qtdMinus % 2 != 0) {
 						Bares::Token * t; 
 						t = new Bares::Token {0, TypeSymbol::OPERAND, "-1"};
@@ -143,53 +134,48 @@ void Bares::tokenize(string & expression, Queue<Bares::Token> & queueToken){
 		// conclude operation, enqueue the new token
 		queueToken.push(*token);
 	}
-	delete token;
+	// assure no memory leak
+	if (token != nullptr)
+		delete token;
 }
 
-
-
-void printStack(Stack<Bares::Token> q){
-	while (!q.empty()) {
-		cout << "Token: "<< q.top().symbol << endl;
-		q.pop();
-	}
-	cout << endl;
-}
-
-
-//	Infix to postfix method
-//	Verifyng errors:
-//	- 1: Numerical constant is invalid
-//	- 6: Invalid scope closure
-//	- 7: Opened scope	
 void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares::Token> & destQueue){
+	// stack for operators
 	Stack<Bares::Token> opStack;
-	
+
 	while (!splittedExpression.empty()) {
-		
+		// get token
 		Bares::Token curToken = splittedExpression.front();
-		
+		// check token's type
 		switch(curToken.type) {
+			// operands are just sent to the queue
 			case TypeSymbol::OPERAND:
 				destQueue.push(curToken);
 				break;
+			// operators are more tricky
 			case TypeSymbol::OPERATOR: {
+				// to check an open scope
 				bool foundOpenScope = false;
+				// while top of stack has a operand with greater priority
 				while (!opStack.empty() && priority((opStack.top()).symbol) >= priority(curToken.symbol)) {
 					// avoid operators != of ')' to take off "(" elements
 					if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
 						destQueue.push(opStack.top());
+					// stop if found "("
 					if (curToken.symbol != ")" && opStack.top().symbol == "(") 
 						break;
+					// stop if close scope
 					if (curToken.symbol == ")" && opStack.top().symbol == "(")
 						foundOpenScope = true;
+					// remove operator from stack
 					opStack.pop();
+					// stop if close scope
 					if (foundOpenScope) break;
 				}
-				
+				// error - invalid scope close	
 				if (curToken.symbol == ")" && !foundOpenScope)
 					errors.push_back({ErrorCode::INVALID_SCOPE_CLOSE, curToken});
-				
+				// push current operator into the stack, if it's not a ")"
 				if (curToken.symbol != ")") 
 					opStack.push(curToken);
 				break;
@@ -201,14 +187,17 @@ void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares
 				errors.push_back({ErrorCode::INVALID_OPERATOR, curToken});
 				break;
 		}
+		// go to next token
 		splittedExpression.pop();
 	}
+	// pop all remanescent operators in stack
 	while (!opStack.empty()) {
+		// if found a "(" that's not gonna be closed, error
 		if (opStack.top().symbol == "(") 
 			errors.push_back({ErrorCode::UNCLOSED_SCOPE, opStack.top()});
-		
 		if (opStack.top().symbol != "(" && opStack.top().symbol != ")")
 			destQueue.push(opStack.top());
+		// go to the next
 		opStack.pop();	
 	}
 }

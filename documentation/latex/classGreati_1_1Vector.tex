@@ -1,0 +1,114 @@
+\hypertarget{classGreati_1_1Vector}{}\section{Greati\+:\+:Vector$<$ T $>$ Class Template Reference}
+\label{classGreati_1_1Vector}\index{Greati\+::\+Vector$<$ T $>$@{Greati\+::\+Vector$<$ T $>$}}
+
+
+A simple Array\+List implementation.  
+
+
+
+
+{\ttfamily \#include $<$vector.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGreati_1_1Vector_a8d5c6c0fe7c2877cd5e01e45560f08f6}{Vector} (int \+\_\+cap=\hyperlink{classGreati_1_1Vector_a4f65eea1b021f9ed7a2e068e9022de5a}{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP})
+\begin{DoxyCompactList}\small\item\em Constructor\+: takes the size. \end{DoxyCompactList}\item 
+\hyperlink{classGreati_1_1Vector_a7ebef8d1de97be5220843160142b7932}{$\sim$\+Vector} (void)\hypertarget{classGreati_1_1Vector_a7ebef8d1de97be5220843160142b7932}{}\label{classGreati_1_1Vector_a7ebef8d1de97be5220843160142b7932}
+
+\begin{DoxyCompactList}\small\item\em Destructor method. \end{DoxyCompactList}\item 
+int \hyperlink{classGreati_1_1Vector_ad8f0b9700c7bf38f5fcca7455dbab180}{size} (void) const \hypertarget{classGreati_1_1Vector_ad8f0b9700c7bf38f5fcca7455dbab180}{}\label{classGreati_1_1Vector_ad8f0b9700c7bf38f5fcca7455dbab180}
+
+\begin{DoxyCompactList}\small\item\em Returns the logical size of the list. \end{DoxyCompactList}\item 
+void \hyperlink{classGreati_1_1Vector_a021abdb4453aedab2728052eb44a7719}{fill} (const T \&)\hypertarget{classGreati_1_1Vector_a021abdb4453aedab2728052eb44a7719}{}\label{classGreati_1_1Vector_a021abdb4453aedab2728052eb44a7719}
+
+\begin{DoxyCompactList}\small\item\em Fill vector with a value. \end{DoxyCompactList}\item 
+void \hyperlink{classGreati_1_1Vector_a41054b62c64bc913806dbfe6e48352d9}{push\+\_\+back} (const T \&)\hypertarget{classGreati_1_1Vector_a41054b62c64bc913806dbfe6e48352d9}{}\label{classGreati_1_1Vector_a41054b62c64bc913806dbfe6e48352d9}
+
+\begin{DoxyCompactList}\small\item\em Add an element to the end. \end{DoxyCompactList}\item 
+T \& \hyperlink{classGreati_1_1Vector_a11bd28b0b2652cb33831c79d2b41a7d7}{operator\mbox{[}$\,$\mbox{]}} (int)\hypertarget{classGreati_1_1Vector_a11bd28b0b2652cb33831c79d2b41a7d7}{}\label{classGreati_1_1Vector_a11bd28b0b2652cb33831c79d2b41a7d7}
+
+\begin{DoxyCompactList}\small\item\em Assig\+At operador. \end{DoxyCompactList}\item 
+const T \hyperlink{classGreati_1_1Vector_a96b366520d54a440d27431ba04237c90}{operator\mbox{[}$\,$\mbox{]}} (int) const \hypertarget{classGreati_1_1Vector_a96b366520d54a440d27431ba04237c90}{}\label{classGreati_1_1Vector_a96b366520d54a440d27431ba04237c90}
+
+\begin{DoxyCompactList}\small\item\em At operator. \end{DoxyCompactList}\item 
+bool \hyperlink{classGreati_1_1Vector_ae08123134236bcc17848515805877945}{operator==} (const \hyperlink{classGreati_1_1Vector}{Vector} \&) const \hypertarget{classGreati_1_1Vector_ae08123134236bcc17848515805877945}{}\label{classGreati_1_1Vector_ae08123134236bcc17848515805877945}
+
+\begin{DoxyCompactList}\small\item\em Equals operator. \end{DoxyCompactList}\item 
+const \hyperlink{classGreati_1_1Vector}{Vector} \& \hyperlink{classGreati_1_1Vector_a001887dfc2edb5a6ddc10f4a4ae24b2b}{operator=} (const \hyperlink{classGreati_1_1Vector}{Vector} \&)\hypertarget{classGreati_1_1Vector_a001887dfc2edb5a6ddc10f4a4ae24b2b}{}\label{classGreati_1_1Vector_a001887dfc2edb5a6ddc10f4a4ae24b2b}
+
+\begin{DoxyCompactList}\small\item\em Assign operator. \end{DoxyCompactList}\item 
+const \hyperlink{classGreati_1_1Vector}{Vector} \& \hyperlink{classGreati_1_1Vector_ac7b27acbe4aaf67b2c8834d97473a292}{operator=} (const initializer\+\_\+list$<$ T $>$ \&)\hypertarget{classGreati_1_1Vector_ac7b27acbe4aaf67b2c8834d97473a292}{}\label{classGreati_1_1Vector_ac7b27acbe4aaf67b2c8834d97473a292}
+
+\begin{DoxyCompactList}\small\item\em Assign list operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classGreati_1_1Vector_a0401cfad220c754004bc9e23a6678c1b}{double\+Data} ()\hypertarget{classGreati_1_1Vector_a0401cfad220c754004bc9e23a6678c1b}{}\label{classGreati_1_1Vector_a0401cfad220c754004bc9e23a6678c1b}
+
+\begin{DoxyCompactList}\small\item\em Doubles the capacity and keep the data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \hyperlink{classGreati_1_1Vector_a95cfc9dbb67abb214cc2516c39c68d23}{vec\+Data}
+\item 
+int \hyperlink{classGreati_1_1Vector_a037b83266461e0b25f963422533efdf0}{vec\+Size}
+\item 
+int \hyperlink{classGreati_1_1Vector_a54359e7c9f68cb4ea6cae8be750b989a}{vec\+Capacity}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{classGreati_1_1Vector_a4f65eea1b021f9ed7a2e068e9022de5a}{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP} = 50
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\\*
+class Greati\+::\+Vector$<$ T $>$}
+
+A simple Array\+List implementation. 
+
+Array\+List with a few methods, useful for B\+A\+R\+ES project mainly.
+
+\begin{DoxyAuthor}{Author}
+Vitor \hyperlink{namespaceGreati}{Greati} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+1 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Greati\+::\+Vector@{Greati\+::\+Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!Greati\+::\+Vector@{Greati\+::\+Vector}}
+\subsubsection[{Vector(int \+\_\+cap=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+A\+P)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Greati\+::\+Vector}$<$ T $>$\+::{\bf Vector} (
+\begin{DoxyParamCaption}
+\item[{int}]{\+\_\+cap = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGreati_1_1Vector_a8d5c6c0fe7c2877cd5e01e45560f08f6}{}\label{classGreati_1_1Vector_a8d5c6c0fe7c2877cd5e01e45560f08f6}
+
+
+Constructor\+: takes the size. 
+
+As parameter is optional, it can be considered the default constructor. 
+
+\subsection{Member Data Documentation}
+\index{Greati\+::\+Vector@{Greati\+::\+Vector}!D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP}!Greati\+::\+Vector@{Greati\+::\+Vector}}
+\subsubsection[{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ const int {\bf Greati\+::\+Vector}$<$ T $>$\+::D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+AP = 50\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classGreati_1_1Vector_a4f65eea1b021f9ed7a2e068e9022de5a}{}\label{classGreati_1_1Vector_a4f65eea1b021f9ed7a2e068e9022de5a}
+The default capacity of the list. \index{Greati\+::\+Vector@{Greati\+::\+Vector}!vec\+Capacity@{vec\+Capacity}}
+\index{vec\+Capacity@{vec\+Capacity}!Greati\+::\+Vector@{Greati\+::\+Vector}}
+\subsubsection[{vec\+Capacity}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ int {\bf Greati\+::\+Vector}$<$ T $>$\+::vec\+Capacity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGreati_1_1Vector_a54359e7c9f68cb4ea6cae8be750b989a}{}\label{classGreati_1_1Vector_a54359e7c9f68cb4ea6cae8be750b989a}
+Size of the list in memory. \index{Greati\+::\+Vector@{Greati\+::\+Vector}!vec\+Data@{vec\+Data}}
+\index{vec\+Data@{vec\+Data}!Greati\+::\+Vector@{Greati\+::\+Vector}}
+\subsubsection[{vec\+Data}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T$\ast$ {\bf Greati\+::\+Vector}$<$ T $>$\+::vec\+Data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGreati_1_1Vector_a95cfc9dbb67abb214cc2516c39c68d23}{}\label{classGreati_1_1Vector_a95cfc9dbb67abb214cc2516c39c68d23}
+Pointer to the data. \index{Greati\+::\+Vector@{Greati\+::\+Vector}!vec\+Size@{vec\+Size}}
+\index{vec\+Size@{vec\+Size}!Greati\+::\+Vector@{Greati\+::\+Vector}}
+\subsubsection[{vec\+Size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ int {\bf Greati\+::\+Vector}$<$ T $>$\+::vec\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGreati_1_1Vector_a037b83266461e0b25f963422533efdf0}{}\label{classGreati_1_1Vector_a037b83266461e0b25f963422533efdf0}
+Logical size of the list. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/vector.\+h\item 
+src/vector.\+cpp\end{DoxyCompactItemize}

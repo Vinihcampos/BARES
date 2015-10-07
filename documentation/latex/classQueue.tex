@@ -1,0 +1,163 @@
+\hypertarget{classQueue}{}\section{Queue$<$ Data $>$ Class Template Reference}
+\label{classQueue}\index{Queue$<$ Data $>$@{Queue$<$ Data $>$}}
+
+
+\hyperlink{classQueue}{Queue} implementation.  
+
+
+
+
+{\ttfamily \#include $<$queue.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classQueue_aa26fae5040939122227f2e2e67db9f13}{Queue} (const int \+\_\+size=\hyperlink{classQueue_ab432905ef6ae1f07d06adbecec4176b7}{D\+E\+F\+\_\+\+S\+I\+ZE})\hypertarget{classQueue_aa26fae5040939122227f2e2e67db9f13}{}\label{classQueue_aa26fae5040939122227f2e2e67db9f13}
+
+\begin{DoxyCompactList}\small\item\em Constructor that initializes all attributes. \end{DoxyCompactList}\item 
+\hyperlink{classQueue_aab7039eecb4b8a19bad375788911a9ec}{$\sim$\+Queue} ()\hypertarget{classQueue_aab7039eecb4b8a19bad375788911a9ec}{}\label{classQueue_aab7039eecb4b8a19bad375788911a9ec}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \hyperlink{classQueue_a62ef5c3748c7c4eaa4caedf8b059e7d7}{push} (const Data \&\+\_\+new)
+\begin{DoxyCompactList}\small\item\em Insert new element. \end{DoxyCompactList}\item 
+const Data \& \hyperlink{classQueue_acd598fa32722961e46af7637fdf96f56}{pop} ()
+\begin{DoxyCompactList}\small\item\em Remove element from the queue. \end{DoxyCompactList}\item 
+const Data \& \hyperlink{classQueue_ada2a7831e194841f7860e6c92f223588}{front} () const 
+\begin{DoxyCompactList}\small\item\em Takes the element at the front of the queue. \end{DoxyCompactList}\item 
+const int \hyperlink{classQueue_a5c6da770b955acea2e61fde3d542ba69}{size} () const 
+\begin{DoxyCompactList}\small\item\em Takes the logical size of the queue. \end{DoxyCompactList}\item 
+bool \hyperlink{classQueue_ae0b482114ae63bf6c541e04ca730436f}{empty} () const 
+\begin{DoxyCompactList}\small\item\em Tells if the queue is empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries double\+Data} ()\hypertarget{classQueue_ad536cdbfc95939595cc946a2f6b03078}{}\label{classQueue_ad536cdbfc95939595cc946a2f6b03078}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classQueue_ab33f3d6f9719400931f35c1639650069}{head}
+\item 
+int \hyperlink{classQueue_ab10ac5c08c3e0b047fca58f67fb06148}{tail}
+\item 
+Data $\ast$ \hyperlink{classQueue_a745cca9cdc31e5211fd8998979a1d555}{data}
+\item 
+int \hyperlink{classQueue_a9bfa5d2a390a36f141191ae93e144d87}{qsize}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{classQueue_ab432905ef6ae1f07d06adbecec4176b7}{D\+E\+F\+\_\+\+S\+I\+ZE} = 20
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Data$>$\\*
+class Queue$<$ Data $>$}
+
+\hyperlink{classQueue}{Queue} implementation. 
+
+Implemented with a simple array, in a circular way. \begin{DoxyAuthor}{Authors}
+Vinicius Campos Tinoco Ribeiro, Vitor Rodrigues \hyperlink{namespaceGreati}{Greati} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\index{Queue@{Queue}!empty@{empty}}
+\index{empty@{empty}!Queue@{Queue}}
+\subsubsection[{empty() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data $>$ bool {\bf Queue}$<$ Data $>$\+::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classQueue_ae0b482114ae63bf6c541e04ca730436f}{}\label{classQueue_ae0b482114ae63bf6c541e04ca730436f}
+
+
+Tells if the queue is empty. 
+
+\begin{DoxyReturn}{Returns}
+true, if empty. 
+\end{DoxyReturn}
+\index{Queue@{Queue}!front@{front}}
+\index{front@{front}!Queue@{Queue}}
+\subsubsection[{front() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data $>$ const Data \& {\bf Queue}$<$ Data $>$\+::front (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classQueue_ada2a7831e194841f7860e6c92f223588}{}\label{classQueue_ada2a7831e194841f7860e6c92f223588}
+
+
+Takes the element at the front of the queue. 
+
+\begin{DoxyReturn}{Returns}
+a reference to the element. 
+\end{DoxyReturn}
+\index{Queue@{Queue}!pop@{pop}}
+\index{pop@{pop}!Queue@{Queue}}
+\subsubsection[{pop()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data $>$ const Data \& {\bf Queue}$<$ Data $>$\+::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classQueue_acd598fa32722961e46af7637fdf96f56}{}\label{classQueue_acd598fa32722961e46af7637fdf96f56}
+
+
+Remove element from the queue. 
+
+\begin{DoxyReturn}{Returns}
+a reference to the removed element. 
+\end{DoxyReturn}
+\index{Queue@{Queue}!push@{push}}
+\index{push@{push}!Queue@{Queue}}
+\subsubsection[{push(const Data \&\+\_\+new)}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data $>$ bool {\bf Queue}$<$ Data $>$\+::push (
+\begin{DoxyParamCaption}
+\item[{const Data \&}]{\+\_\+new}
+\end{DoxyParamCaption}
+)}\hypertarget{classQueue_a62ef5c3748c7c4eaa4caedf8b059e7d7}{}\label{classQueue_a62ef5c3748c7c4eaa4caedf8b059e7d7}
+
+
+Insert new element. 
+
+\begin{DoxyReturn}{Returns}
+true, if inserted. 
+\end{DoxyReturn}
+\index{Queue@{Queue}!size@{size}}
+\index{size@{size}!Queue@{Queue}}
+\subsubsection[{size() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data $>$ const int {\bf Queue}$<$ Data $>$\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classQueue_a5c6da770b955acea2e61fde3d542ba69}{}\label{classQueue_a5c6da770b955acea2e61fde3d542ba69}
+
+
+Takes the logical size of the queue. 
+
+\begin{DoxyReturn}{Returns}
+the logical size. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Queue@{Queue}!data@{data}}
+\index{data@{data}!Queue@{Queue}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data$>$ Data$\ast$ {\bf Queue}$<$ Data $>$\+::data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQueue_a745cca9cdc31e5211fd8998979a1d555}{}\label{classQueue_a745cca9cdc31e5211fd8998979a1d555}
+Pointer to data. \index{Queue@{Queue}!D\+E\+F\+\_\+\+S\+I\+ZE@{D\+E\+F\+\_\+\+S\+I\+ZE}}
+\index{D\+E\+F\+\_\+\+S\+I\+ZE@{D\+E\+F\+\_\+\+S\+I\+ZE}!Queue@{Queue}}
+\subsubsection[{D\+E\+F\+\_\+\+S\+I\+ZE}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data$>$ const int {\bf Queue}$<$ Data $>$\+::D\+E\+F\+\_\+\+S\+I\+ZE = 20\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classQueue_ab432905ef6ae1f07d06adbecec4176b7}{}\label{classQueue_ab432905ef6ae1f07d06adbecec4176b7}
+Default capacity. \index{Queue@{Queue}!head@{head}}
+\index{head@{head}!Queue@{Queue}}
+\subsubsection[{head}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data$>$ int {\bf Queue}$<$ Data $>$\+::head\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQueue_ab33f3d6f9719400931f35c1639650069}{}\label{classQueue_ab33f3d6f9719400931f35c1639650069}
+Points to the head of the queue. \index{Queue@{Queue}!qsize@{qsize}}
+\index{qsize@{qsize}!Queue@{Queue}}
+\subsubsection[{qsize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data$>$ int {\bf Queue}$<$ Data $>$\+::qsize\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQueue_a9bfa5d2a390a36f141191ae93e144d87}{}\label{classQueue_a9bfa5d2a390a36f141191ae93e144d87}
+Capacity in memory. \index{Queue@{Queue}!tail@{tail}}
+\index{tail@{tail}!Queue@{Queue}}
+\subsubsection[{tail}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Data$>$ int {\bf Queue}$<$ Data $>$\+::tail\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQueue_ab10ac5c08c3e0b047fca58f67fb06148}{}\label{classQueue_ab10ac5c08c3e0b047fca58f67fb06148}
+Points to the tail of the queue. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/queue.\+h\item 
+src/queue.\+cpp\end{DoxyCompactItemize}

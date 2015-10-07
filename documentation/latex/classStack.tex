@@ -1,0 +1,155 @@
+\hypertarget{classStack}{}\section{Stack$<$ Object $>$ Class Template Reference}
+\label{classStack}\index{Stack$<$ Object $>$@{Stack$<$ Object $>$}}
+
+
+Implementation of a stack.  
+
+
+
+
+{\ttfamily \#include $<$stack.\+h$>$}
+
+Inheritance diagram for Stack$<$ Object $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classStack}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classStack_a78a698445d1ac0e1bb2d2678c3e6b4df}{Stack} ()\hypertarget{classStack_a78a698445d1ac0e1bb2d2678c3e6b4df}{}\label{classStack_a78a698445d1ac0e1bb2d2678c3e6b4df}
+
+\begin{DoxyCompactList}\small\item\em Constructor that initializes all attributes. \end{DoxyCompactList}\item 
+\hyperlink{classStack_a853c2cc752287e206ea4d759f7baa211}{$\sim$\+Stack} ()\hypertarget{classStack_a853c2cc752287e206ea4d759f7baa211}{}\label{classStack_a853c2cc752287e206ea4d759f7baa211}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classStack_a7a7712fc7e216d9a5ebdff5e2eb82e64}{push} (const Object \&x)\hypertarget{classStack_a7a7712fc7e216d9a5ebdff5e2eb82e64}{}\label{classStack_a7a7712fc7e216d9a5ebdff5e2eb82e64}
+
+\begin{DoxyCompactList}\small\item\em Insert element. \end{DoxyCompactList}\item 
+const Object \& \hyperlink{classStack_a3057daa6cff18f7335afe5a1e3f3fd04}{pop} ()
+\begin{DoxyCompactList}\small\item\em Remove element. \end{DoxyCompactList}\item 
+const Object \& \hyperlink{classStack_a22b3d15b5604db3175589ade35f9a9c9}{top} () const 
+\begin{DoxyCompactList}\small\item\em Takes the element at the top. \end{DoxyCompactList}\item 
+bool \hyperlink{classStack_ae11870056b681ec3362faca36d6910ec}{empty} () const 
+\begin{DoxyCompactList}\small\item\em Tells if the stack is empty. \end{DoxyCompactList}\item 
+void \hyperlink{classStack_ac209ae083b7050deb2139f412f9b3861}{clear} ()\hypertarget{classStack_ac209ae083b7050deb2139f412f9b3861}{}\label{classStack_ac209ae083b7050deb2139f412f9b3861}
+
+\begin{DoxyCompactList}\small\item\em Clear stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classStack_aa0b9a1c9447e1abaa6e53c84b6a9aaa8}{double\+Data} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classStack_aa665dd77e374b82bb86e1fce27308439}{capacity}
+\item 
+int \hyperlink{classStack_a474893fc0e2f8f87ccd70c09d022439c}{top\+Index}
+\item 
+Object $\ast$ \hyperlink{classStack_a3d78e7aef171483f22406e598892b7a2}{data}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{classStack_ace70f66cadde9cb3a090e6915eb529aa}{D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY} = 50
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Object$>$\\*
+class Stack$<$ Object $>$}
+
+Implementation of a stack. 
+
+Implemented with a simple array, dinamically reallocated when necessary. \begin{DoxyAuthor}{Authors}
+Vitor Rodrigues \hyperlink{namespaceGreati}{Greati}, Vinicius Campos Tinoco Ribeiro 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\index{Stack@{Stack}!double\+Data@{double\+Data}}
+\index{double\+Data@{double\+Data}!Stack@{Stack}}
+\subsubsection[{double\+Data()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ void {\bf Stack}$<$ Object $>$\+::double\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStack_aa0b9a1c9447e1abaa6e53c84b6a9aaa8}{}\label{classStack_aa0b9a1c9447e1abaa6e53c84b6a9aaa8}
+Doubles the capacity when necessary. \index{Stack@{Stack}!empty@{empty}}
+\index{empty@{empty}!Stack@{Stack}}
+\subsubsection[{empty() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ bool {\bf Stack}$<$ Object $>$\+::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStack_ae11870056b681ec3362faca36d6910ec}{}\label{classStack_ae11870056b681ec3362faca36d6910ec}
+
+
+Tells if the stack is empty. 
+
+\begin{DoxyReturn}{Returns}
+true, if it\textquotesingle{}s empty. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classAbsStack}{Abs\+Stack$<$ Object $>$}.
+
+\index{Stack@{Stack}!pop@{pop}}
+\index{pop@{pop}!Stack@{Stack}}
+\subsubsection[{pop()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ const Object\& {\bf Stack}$<$ Object $>$\+::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStack_a3057daa6cff18f7335afe5a1e3f3fd04}{}\label{classStack_a3057daa6cff18f7335afe5a1e3f3fd04}
+
+
+Remove element. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the removed data. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classAbsStack}{Abs\+Stack$<$ Object $>$}.
+
+\index{Stack@{Stack}!top@{top}}
+\index{top@{top}!Stack@{Stack}}
+\subsubsection[{top() const }]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ const Object\& {\bf Stack}$<$ Object $>$\+::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStack_a22b3d15b5604db3175589ade35f9a9c9}{}\label{classStack_a22b3d15b5604db3175589ade35f9a9c9}
+
+
+Takes the element at the top. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the element. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classAbsStack}{Abs\+Stack$<$ Object $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Stack@{Stack}!capacity@{capacity}}
+\index{capacity@{capacity}!Stack@{Stack}}
+\subsubsection[{capacity}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ int {\bf Stack}$<$ Object $>$\+::capacity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStack_aa665dd77e374b82bb86e1fce27308439}{}\label{classStack_aa665dd77e374b82bb86e1fce27308439}
+Size in memory. \index{Stack@{Stack}!data@{data}}
+\index{data@{data}!Stack@{Stack}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ Object$\ast$ {\bf Stack}$<$ Object $>$\+::data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStack_a3d78e7aef171483f22406e598892b7a2}{}\label{classStack_a3d78e7aef171483f22406e598892b7a2}
+Pointer to data. \index{Stack@{Stack}!D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY@{D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY}}
+\index{D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY@{D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY}!Stack@{Stack}}
+\subsubsection[{D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ const int {\bf Stack}$<$ Object $>$\+::D\+E\+F\+\_\+\+C\+A\+P\+A\+C\+I\+TY = 50\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classStack_ace70f66cadde9cb3a090e6915eb529aa}{}\label{classStack_ace70f66cadde9cb3a090e6915eb529aa}
+Default capacity. \index{Stack@{Stack}!top\+Index@{top\+Index}}
+\index{top\+Index@{top\+Index}!Stack@{Stack}}
+\subsubsection[{top\+Index}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Object $>$ int {\bf Stack}$<$ Object $>$\+::top\+Index\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStack_a474893fc0e2f8f87ccd70c09d022439c}{}\label{classStack_a474893fc0e2f8f87ccd70c09d022439c}
+Points to the top of the stack. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/stack.\+h\end{DoxyCompactItemize}
