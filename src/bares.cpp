@@ -203,39 +203,41 @@ void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares
 }
 
 int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
+	//	Stack to operations 
 	Stack <Bares::Token> stackOp;
 	Token op1;
 	Token op2;
+	// While the queue with postfix operations isn't empty
 	while(!_postFix.empty()){
-		if(_postFix.front().type == TypeSymbol::OPERATOR){
-			if(!stackOp.empty()){
-				op2 = stackOp.top();
-				stackOp.pop();
+		if(_postFix.front().type == TypeSymbol::OPERATOR){ // if the symbol is operator
+			if(!stackOp.empty()){ // if the stack isn't empty
+				op2 = stackOp.top(); // op2 receive the top of stack
+				stackOp.pop(); // the symbol in op2 is removed from stack
 
-				if(!stackOp.empty()){
-					op1 = stackOp.top();
-					stackOp.pop();
+				if(!stackOp.empty()){ // if the stack isn't empty
+					op1 = stackOp.top(); // op1 receive the top of stack
+					stackOp.pop(); // the symbol in op1 is removed from stack
 
-					if(realizeOperation(op1, op2, _postFix.front().symbol)){
-						stackOp.push(op1);
+					if(realizeOperation(op1, op2, _postFix.front().symbol)){ // if the operation was computed with successful
+						stackOp.push(op1); // the stack receive the value of operation
 					}
-					else{
+					else{ // our queue with errors is incremented with the type of error and the index of error
 						errors.push_back({ErrorCode::DIVISION_BY_ZERO, _postFix.front()});
 					}
-				}else{
+				}else{ // our queue with errors is incremented with the type of error and the index of error
 					errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
 				}
-			}else{
+			}else{ // our queue with errors is incremented with the type of error and the index of error
 				errors.push_back({ErrorCode::LACKING_OPERAND, _postFix.front()});
 			}
-		}else{
+		}else{ // if the symbol isn't operator, the stack is incremented with the operand
 			stackOp.push(_postFix.front());
 		}
-		_postFix.pop();
+		_postFix.pop(); // The front symbol of queue is removed
 	}
 	Token result;
 	int first = 0;
-	while(!stackOp.empty()){
+	while(!stackOp.empty()){ // verifyng if stack isn't empty
 		if(!first){
 			result = stackOp.top();
 			++first;
@@ -245,7 +247,7 @@ int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
 			++first; 
 		}
 		stackOp.pop();
-	}
+	}// if the stack has more than on value, the expression is wrong
 
 	if(first == 1){
 		return _result = stoi(result.symbol, nullptr, 10);
