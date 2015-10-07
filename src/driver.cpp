@@ -64,5 +64,9 @@ int main(int argsize, char * argsi[]){
 	}
 	std::cout << "\nEnd of BARES." << endl;
 
+	ifs.close();
+	if (ofs.is_open())
+		ofs.close();
+
 	return 0;
 }
