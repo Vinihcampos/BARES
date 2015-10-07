@@ -54,6 +54,7 @@ O projeto está sub-dividido em 6 pastas:
 	* data: Possui arquivos que servem como entrada e saida para a execução do programa
 	* documentation: Possui toda a documentação do projeto com doxygen
 	* include: Possui o arquivo de cabeçalho das classes do projeto
+	* lib: Possui os objetos do sistema
 	* src: Possui o arquivo de implementação dos métodos das classes do projeto
 
 # Guia de utilização(MODO TEXTO) - Linux #
