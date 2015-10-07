@@ -1,20 +1,33 @@
+# MAKEFILE 
+# AUTHORS: Vinicius Campos Tinoco Ribeiro
+#		   Vitor Rodrigues Greati
+
+
 CC = g++
 CPPFLAGS = -std=c++11 -I include/
 CPPSOURCE = src/bares.cpp src/driver.cpp
-CPPDESTINY = bin/driver
+CPPDESTINY = bin/bares
+DRIVEROBJECT = lib/driver.o
+BARESOBJECT = lib/bares.o
 
-all: driver
+all: bares
 
-driver: 
-	$(CC) $(CPPFLAGS) $(CPPSOURCE) -o $(CPPDESTINY) -g
+bares: $(DRIVEROBJECT) $(BARESOBJECT)
+	@echo ">>>Compiling all"
+	$(CC) $(CPPFLAGS) $(DRIVEROBJECT) $(BARESOBJECT) -o $(CPPDESTINY) -g
+
+$(DRIVEROBJECT): src/driver.cpp
+	@echo ">>>Compiling driver.cpp"
+	$(CC) $(CPPFLAGS) -c src/driver.cpp -o $(DRIVEROBJECT)
+
+$(BARESOBJECT): src/bares.cpp
+	@echo ">>>Compiling bares.cpp"
+	$(CC) $(CPPFLAGS) -c src/bares.cpp -o $(BARESOBJECT)
 
 clean:
-	-rm -f *.o bin/driver *~
-
-run: 
-	./bin/driver data/simple.dat 
+	@echo ">>>Removing all compiled files"
+	rm -f *o $(CPPDESTINY) $(DRIVEROBJECT) $(BARESOBJECT)
 
 remade:
-	$(MAKE) run 
 	$(MAKE) clean
 	$(MAKE)
