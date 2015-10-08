@@ -9,6 +9,7 @@ CPPSOURCE = src/bares.cpp src/driver.cpp
 CPPDESTINY = bin/bares
 DRIVEROBJECT = lib/driver.o
 BARESOBJECT = lib/bares.o
+DEFAULT = data/simple.dat
 
 all: bares
 
@@ -28,6 +29,10 @@ clean:
 	@echo ">>>Removing all compiled files"
 	rm -f *o $(CPPDESTINY) $(DRIVEROBJECT) $(BARESOBJECT)
 
+run:
+	./bin/bares $$INPUT
+
 remade:
+	$(MAKE) run
 	$(MAKE) clean
 	$(MAKE)
