@@ -30,7 +30,7 @@ clean:
 	rm -f *o $(CPPDESTINY) $(DRIVEROBJECT) $(BARESOBJECT)
 
 run:
-	./bin/bares $$INPUT
+	./bin/bares $(filter-out $@,$(MAKECMDGOALS))
 
 remade:
 	$(MAKE) run
