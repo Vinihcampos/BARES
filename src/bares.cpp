@@ -150,6 +150,11 @@ void Bares::infixToPostfix(Queue<Bares::Token> & splittedExpression, Queue<Bares
 		switch(curToken.type) {
 			// operands are just sent to the queue
 			case TypeSymbol::OPERAND:
+				// checking if number is out of bounds
+				int test = stoi(curToken.symbol, nullptr, 10);
+				if (test < -32786 || test > 32767)
+					errors.push_back({ErrorCode::INVALID_NUMBER, curToken});
+				// even if out of bounds, enqueue
 				destQueue.push(curToken);
 				break;
 			// operators are more tricky
