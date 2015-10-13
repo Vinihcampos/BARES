@@ -48,7 +48,8 @@ class Bares{
 			LACKING_OPERATOR,	/**< There is a missing operator */
 			INVALID_SCOPE_CLOSE,	/**< Closing a non-opened scope.*/
 			UNCLOSED_SCOPE,		/**< A scope was left open.*/
-			DIVISION_BY_ZERO	/**< A division by zero ocurred! */
+			DIVISION_BY_ZERO,	/**< A division by zero ocurred! */
+			INVALID_NUMBER_IN_OPERATION		/**< Thrown when a number out of range is obtained in operations. */
 		};
 
 		/**
@@ -133,6 +134,9 @@ class Bares{
 						break;
 					case ErrorCode::DIVISION_BY_ZERO:
 						msg += "Division by zero!";
+						break;
+					case ErrorCode::INVALID_NUMBER_IN_OPERATION:
+						msg += "Number out of range obtained in operations.";
 						break;
 					default:
 						msg += "Unknown error.";

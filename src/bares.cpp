@@ -219,7 +219,11 @@ int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
 					stackOp.pop(); // the symbol in op1 is removed from stack
 
 					if(realizeOperation(op1, op2, _postFix.front().symbol)){ // if the operation was computed with successful
-						stackOp.push(op1); // the stack receive the value of operation
+						int _op1 = stoi(op1.symbol, nullptr, 10);
+						if(_op1 < -32768 || _op1 > 32767){
+							errors.push_back({ErrorCode::INVALID_NUMBER_IN_OPERATION, _postFix.front()});
+						}
+						stackOp.push(op1); // the stack receive the value of operation 
 					}
 					else{ // our queue with errors is incremented with the type of error and the index of error
 						errors.push_back({ErrorCode::DIVISION_BY_ZERO, _postFix.front()});
