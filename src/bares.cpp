@@ -228,7 +228,7 @@ int Bares::analizeExpression(Queue<Bares::Token> & _postFix, int & _result) {
 						if(_op1 < -32768 || _op1 > 32767){
 							errors.push_back({ErrorCode::INVALID_NUMBER_IN_OPERATION, _postFix.front()});
 						}
-						stackOp.push(op1); // the stack receive the value of operation 
+						stackOp.push(op1); // the stack receive the value of operation
 					}
 					else{ // our queue with errors is incremented with the type of error and the index of error
 						errors.push_back({ErrorCode::DIVISION_BY_ZERO, _postFix.front()});
