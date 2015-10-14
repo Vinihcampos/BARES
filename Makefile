@@ -19,11 +19,11 @@ bares: $(DRIVEROBJECT) $(BARESOBJECT)
 
 $(DRIVEROBJECT): src/driver.cpp
 	@echo ">>>Compiling driver.cpp"
-	$(CC) $(CPPFLAGS) -c src/driver.cpp -o $(DRIVEROBJECT)
+	$(CC) $(CPPFLAGS) -c src/driver.cpp -o $(DRIVEROBJECT) -g
 
 $(BARESOBJECT): src/bares.cpp
 	@echo ">>>Compiling bares.cpp"
-	$(CC) $(CPPFLAGS) -c src/bares.cpp -o $(BARESOBJECT)
+	$(CC) $(CPPFLAGS) -c src/bares.cpp -o $(BARESOBJECT) -g
 
 clean:
 	@echo ">>>Removing all compiled files"
@@ -31,6 +31,9 @@ clean:
 
 run:
 	./bin/bares $(filter-out $@,$(MAKECMDGOALS))
+
+run_valgrind:
+	valgrind --leak-check=yes ./bin/bares $(filter-out $@,$(MAKECMDGOALS))
 
 remade:
 	$(MAKE) run

@@ -1,0 +1,58 @@
+Evaluated expression: ----3
+3
+
+Evaluated expression: ---1
+-1
+
+Evaluated expression: -(------(--(---------2 + ----------3))) * 4 - 2
+-6
+
+Evaluated expression: (-2 + -5)
+-7
+
+Evaluated expression: -(2)
+-2
+
+Evaluated expression: -(2 + 3)
+-5
+
+Evaluated expression: (3 + 2) * 4
+20
+
+Evaluated expression: -2 * 1
+-2
+
+Evaluated expression: 4 * 1 - 2 / 1 * --2
+0
+
+Evaluated expression: 4 a * 2 / = 0 *
+4 errors ocurred!
+Error at column 2: Invalid operand.
+Error at column 10: Invalid operator.
+Error at column 8: Division by zero!
+Error at column 14: Valid operand lacking.
+
+Evaluated expression: (7 + 2
+1 errors ocurred!
+Error at column 0: Unclosed scope.
+
+Evaluated expression: 2 + (222-1))
+1 errors ocurred!
+Error at column 11: Invalid scope closing.
+
+Evaluated expression: 2 / (1 - 1)
+1 errors ocurred!
+Error at column 2: Division by zero!
+
+Evaluated expression: ((-2 + 5) * 4)
+12
+
+Evaluated expression: -(-(5 + -7))
+-2
+
+Evaluated expression: -4 -2
+-6
+
+Evaluated expression: 2^2^2^2^2^2
+-2147483648
+

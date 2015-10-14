@@ -62,11 +62,19 @@ O projeto está sub-dividido em 6 pastas:
 	1 - Descompactar o projeto na pasta de preferência
 	1 - Abra o terminal
 	2 - make
-	3 - Para executar, tem-se duas maneiras:
+	3 - Para executar, tem-se quatro maneiras:
+		* sem make:  
 		./bin/bares data/<arquivo_de_entrada>
 		- O comando acima apenas executa o programa com a entrada de arquivos.
 		ou 
 		./bin/bares /data/<arquivo_de_entrada> data/<arquivo_de_saida>
+		- O comando acima apenas executa o programa com a entrada de arquivos e salva na pasta de data
+
+		* com make:
+		make run data/<arquivo_de_entrada>
+		- O comando acima apenas executa o programa com a entrada de arquivos.
+		ou
+		make run /data/<arquivo_de_entrada> data/<arquivo_de_saida>
 		- O comando acima apenas executa o programa com a entrada de arquivos e salva na pasta de data
 
 		Obs: <arquivo_de_entrada> é um arquivo de texto com entradas das expressões
@@ -83,12 +91,19 @@ O projeto está sub-dividido em 6 pastas:
 	* O projeto passou no valgrind sem vazamento de memória,
 	resposta no terminal ao fim de uma execução: 
 
-	==9020== 
-	==9020== HEAP SUMMARY:
-	==9020==     in use at exit: 0 bytes in 0 blocks
-	==9020==   total heap usage: 400 allocs, 400 frees, 80,418 bytes allocated
-	==9020== 
-	==9020== All heap blocks were freed -- no leaks are possible
-	==9020== 
-	==9020== For counts of detected and suppressed errors, rerun with: -v
-	==9020== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+	==5906== 
+	==5906== HEAP SUMMARY:
+	==5906==     in use at exit: 0 bytes in 0 blocks
+	==5906==   total heap usage: 477 allocs, 477 frees, 90,519 bytes allocated
+	==5906== 
+	==5906== All heap blocks were freed -- no leaks are possible
+	==5906== 
+	==5906== For counts of detected and suppressed errors, rerun with: -v
+	==5906== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+	* Para fazer o teste basta rodar o comando
+	make run_valgrind <arquivo_de_entrada> 
+	ou
+	make run_valgrind <arquivo_de_entrada> <arquivo_de_saida>
+  	
+  	Obs: É preciso ter pelo menos rodado o comando make antes de testar o make run_valgrind
